@@ -1,0 +1,37 @@
+generated: '2026-07-17'
+method: probed
+source: live probes of api.digio.in / www.digio.in / documentation.digio.in
+notes: >-
+  No machine-readable /.well-known/ discovery documents are published on the API
+  host api.digio.in (all 404). The www.digio.in host returns HTTP 200 for arbitrary
+  /.well-known/ paths because it is a Next.js single-page app that serves the app
+  shell (HTML) as a catch-all - these are NOT valid well-known documents, so they
+  are recorded as not-present. No security.txt, OpenID/OAuth metadata, api-catalog,
+  or ai-plugin.json exist. Authentication is HTTP Basic (no OAuth/OIDC discovery).
+host: https://api.digio.in
+documents:
+  - path: /.well-known/security.txt
+    host: api.digio.in
+    status: 404
+  - path: /.well-known/security.txt
+    host: www.digio.in
+    status: 200
+    valid: false
+    note: SPA catch-all returns HTML app shell, not an RFC 9116 security.txt
+  - path: /.well-known/openid-configuration
+    host: api.digio.in
+    status: 404
+  - path: /.well-known/oauth-authorization-server
+    host: api.digio.in
+    status: 404
+  - path: /.well-known/api-catalog
+    host: api.digio.in
+    status: 404
+  - path: /.well-known/ai-plugin.json
+    host: api.digio.in
+    status: 404
+  - path: /.well-known/ai-plugin.json
+    host: www.digio.in
+    status: 200
+    valid: false
+    note: SPA catch-all returns HTML app shell, not a valid ai-plugin manifest

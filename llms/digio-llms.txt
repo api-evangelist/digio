@@ -1,0 +1,53 @@
+# Digio - Digital Trust Infrastructure
+
+Onboard trusted users, digitally sign documents, collect recurring payments, and be DPDPA-compliant with our suite of products.
+
+## Identity Verification Solution: KYC/KYB
+
+- [DigiKYC Onboard users securely] (https://www.digio.in/digi-kyc/): A comprehensive solution for performing customer Know Your Customer (KYC) processes efficiently and securely. ID OCR checks, Aadhar/PAN verification, face verification, V-CIP, KRA, and CKYC. SEBI RBI-compliant onboarding flows.
+
+## Document Management and Digital Signing
+
+- [DigiDocs Digitize Documents & Forms] (https://www.digio.in/digi-docs/): A tool for digitizing documents and forms, streamlining the document management process.
+- [DigiSign Digital Signing Platform] (https://www.digio.in/digi-sign/): A secure digital signing platform that allows users to legally e-sign documents and e-stamp paper using DSC and Aadhar e-sign, enhancing the efficiency of document workflows.
+
+## Recurring Payment Solutions
+
+- [DigiCollect Automate Recurring Payments] (https://www.digio.in/digi-collect/): A solution for automating recurring payment processes using NACH and UPI, simplifying billing and payment collection.
+
+## Account Aggregation
+
+- [DigioLink Account Aggregator] (https://www.digio.link/): An account aggregation service that consolidates financial data from multiple sources for better financial intelligence.
+
+## AML/CFT Solution
+
+- [DigiShield Name Screening & Continuous Transaction Monitoring] (https://www.digio.in/digi-shield/): A service that provides advanced name screening and continuous monitoring against sensitive watchlists to mitigate AML/CFT risks.
+
+## DPDPA Data Protection and Data Privacy Solution
+
+- [CoTrust by Digio DPDPA Privacy Solution] (https://www.digio.in/co-trust/): A privacy solution that ensures compliance with data protection regulations while managing customer data.
+
+## Developer Resources
+
+- [Developers] (https://documentation.digio.in/): A section dedicated to developers, providing resources and tools for integrating and utilizing Digio's services.
+
+## Additional Resources
+
+- [Blogs] (https://www.digio.in/blog/): A collection of articles and insights related to digital solutions and industry trends.
+- [About Us] (https://www.digio.in/about-us/): Information about the company, its mission, and its values.
+
+## Recognition and Achievements
+
+- [Recognised among World's 100 most innovative RegTechs by World Fintech Forum] (https://fintech.global/regtech100/wp-content/uploads/2020/12/RegTech100-Summary-2021.pdf): An acknowledgment of the company's innovative solutions in the RegTech space.
+- [Finalist - best innovation in regtech - IFTA 2021] (https://www.indiafintech.com/ifta-2021-nomination/): Recognition for outstanding innovation in the regulatory technology sector.
+- [Financial Times high growth companies in APAC 2022, ranked 3rd in India and 15th in APAC] (https://www.ft.com/high-growth-asia-pacific-ranking-2022): A notable ranking highlighting the company's growth and impact in the Asia-Pacific region.
+
+## Contact
+
+- Website: [https://digio.in](https://www.digio.in)
+- Sales: [bd@digio.in](bd@digio.in)
+- Company: Digio
+
+## Last updated
+
+February 25th, 2026

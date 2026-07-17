@@ -1,0 +1,64 @@
+generated: '2026-07-17'
+method: searched
+source: https://github.com/digio-tech
+notes: >-
+  Digio ships first-party CLIENT-SIDE / mobile journey SDKs (iOS, Android/Kotlin,
+  React Native, Flutter, Web) from the github.com/digio-tech and github.com/digio-in
+  organizations - these embed Digio KYC, eSign and eMandate journeys into host apps.
+  Digio does not publish a first-party server-side API SDK on npm/PyPI/Maven; the
+  npm packages "digio" and "digio-api" are THIRD-PARTY (a DigitalOcean API wrapper)
+  and are excluded. Sample/demo integration apps are listed as examples, not libraries.
+packages:
+  - language: swift-objc
+    registry: github
+    name: digio-ios-sdk
+    url: https://github.com/digio-tech/digio-ios-sdk
+    install: "Add via CocoaPods / Swift Package Manager per documentation.digio.in/sdk/"
+    official: true
+    category: mobile-journey-sdk
+  - language: swift-objc
+    registry: github
+    name: digio-iOS-KYC-SDK
+    url: https://github.com/digio-tech/digio-iOS-KYC-SDK
+    install: "Add via CocoaPods / Swift Package Manager per documentation.digio.in/sdk/"
+    official: true
+    category: mobile-journey-sdk
+  - language: kotlin
+    registry: github
+    name: DigioSampleApp
+    url: https://github.com/digio-tech/DigioSampleApp
+    install: "Reference Android integration; Digio Android SDK per documentation.digio.in/sdk/"
+    official: true
+    category: sample-app
+  - language: javascript
+    registry: github
+    name: react-native-sdk
+    url: https://github.com/digio-tech/react-native-sdk
+    install: "Consume per documentation.digio.in/sdk/ React Native integration guide"
+    official: true
+    category: mobile-journey-sdk
+  - language: dart
+    registry: github
+    name: DigioFlutterSample
+    url: https://github.com/digio-tech/DigioFlutterSample
+    install: "Reference Flutter integration; demo project for the Digio SDK"
+    official: true
+    category: sample-app
+  - language: typescript
+    registry: github
+    name: DigioReactSample
+    url: https://github.com/digio-tech/DigioReactSample
+    install: "Reference React web integration; demo project for the Digio SDK"
+    official: true
+    category: sample-app
+  - language: multi
+    registry: github
+    name: api_client
+    url: https://github.com/digio-tech/api_client
+    install: "Digio API client reference"
+    official: true
+    category: api-client
+docs:
+  - https://documentation.digio.in/sdk/
+  - https://documentation.digio.in/sdk/web/web/
+  - https://documentation.digio.in/digicollect/sdk/

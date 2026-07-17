@@ -1,0 +1,34 @@
+generated: '2026-07-17'
+method: derived
+source: openapi/digio-openapi.yml
+format: custom-envelope
+envelope:
+  fields:
+    - code: integer error/status code
+    - message: human-readable error message
+    - details: additional error context
+  media_type: application/json
+  note: >-
+    Digio returns a custom {code, message, details} JSON error envelope rather than
+    RFC 9457 application/problem+json. Every operation documents a 401 for missing or
+    invalid HTTP Basic credentials; other 4xx/5xx follow the same envelope shape.
+problems:
+  - status: 401
+    title: Unauthorized
+    description: Missing or invalid Basic authentication credentials.
+    source_operation: openapi/digio-openapi.yml#responses/Unauthorized
+    remediation: >-
+      Send Authorization: Basic Base64(client_id:client_secret) using the
+      environment-correct credentials issued from the Digio dashboard.
+  - status: 400
+    title: Bad Request
+    description: Malformed request body or missing required fields (derived; documented per-operation).
+    remediation: Validate required fields per the operation schema before retrying.
+  - status: 404
+    title: Not Found
+    description: The referenced document, mandate, or KYC request id does not exist.
+    remediation: Verify the DID / mandate / KID identifier returned at creation time.
+  - status: 500
+    title: Internal Server Error
+    description: Unexpected server-side failure.
+    remediation: Retry with backoff; contact tech@digio.in if persistent.

@@ -1,0 +1,43 @@
+generated: '2026-07-17'
+method: derived
+source: openapi/digio-openapi.yml
+entities:
+  - name: SignDocument
+    id_prefix: DID
+    description: An eSign request and its signed document, tracking signing parties and status.
+    key_fields: [id, agreement_status, signing_parties, file_name, created_at]
+  - name: Signer
+    description: A single signer identified by email or phone, with sign type (aadhaar/electronic/dsc).
+    key_fields: [identifier, name, sign_type, reason]
+  - name: Mandate
+    description: An eNACH / NACH / UPI Autopay recurring-debit mandate.
+    key_fields: [mandate_id, umrn, state, maximum_amount, npci_txn_id, created_at]
+  - name: KycRequest
+    id_prefix: KID
+    description: A DigiKYC verification workflow instance driven by a template.
+    key_fields: [id, status, customer_identifier, actions, created_at]
+  - name: Template
+    description: A DigiDocs / DigiKYC pre-configured template referenced by id or name.
+    key_fields: [template_id, template_name, template_values]
+relationships:
+  - from: SignDocument
+    to: Signer
+    type: has_many
+    via: signing_parties / signers
+  - from: SignDocument
+    to: Template
+    type: belongs_to
+    via: template_id
+    note: for template-generated sign requests (createSignRequestFromTemplate)
+  - from: KycRequest
+    to: Template
+    type: belongs_to
+    via: template_name
+  - from: Mandate
+    to: Customer
+    type: belongs_to
+    via: customer_identifier
+notes: >-
+  Entity-relationship graph DERIVED from OpenAPI schemas and id-reference fields.
+  Ids are opaque strings; DID (documents) and KID (KYC) prefixes are documented,
+  and mandates carry an NPCI-issued UMRN.

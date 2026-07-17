@@ -1,0 +1,41 @@
+generated: '2026-07-17'
+method: derived
+source: openapi/digio-openapi.yml
+authentication:
+  style: http-basic
+  header: "Authorization: Basic Base64(client_id:client_secret)"
+  content_type: application/json
+  ref: authentication/digio-authentication.yml
+idempotency:
+  supported: false
+  note: >-
+    Digio does not document an idempotency-key header or parameter; no Idempotency-Key
+    exists in the modeled OpenAPI. Create operations (eSign upload, mandate create, KYC
+    request) are not documented as idempotent - callers should track returned ids
+    (DID / mandate id / KID) to avoid duplicates.
+pagination:
+  supported: false
+  note: The captured operations are single-resource create/get; no list pagination is documented.
+versioning:
+  style: uri-path
+  ref: lifecycle/digio-lifecycle.yml
+request_tracing:
+  header: null
+  note: No documented request-id / correlation-id header.
+error_envelope:
+  shape: "{ code, message, details }"
+  media_type: application/json
+  ref: errors/digio-problem-types.yml
+async_events:
+  mechanism: webhooks
+  docs: https://documentation.digio.in/webhooks/
+  ref: asyncapi/digio-webhooks.yml
+rate_limiting:
+  ref: rate-limits/digio-rate-limits.yml
+identifiers:
+  document: "DID... (eSign request / signed document)"
+  mandate: "eNACH / NACH mandate id + UMRN (NPCI Unique Mandate Reference Number)"
+  kyc: "KID... (KYC request)"
+notes: >-
+  Cross-cutting request/response semantics DERIVED from the OpenAPI and Digio docs.
+  Digio does NOT publish an idempotency contract, so no Idempotency pointer is emitted.

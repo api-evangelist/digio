@@ -1,0 +1,48 @@
+generated: '2026-07-17'
+method: derived
+source: openapi/digio-openapi.yml
+compliance_docs: https://www.digio.in/
+notes: >-
+  Standards conformance DERIVED from the OpenAPI (auth scheme, response media types,
+  operations) plus SEARCHED regulatory/compliance posture published on digio.in and
+  captured in security/digio-trust-center.yml. Digio operates under Indian digital-trust
+  regulatory frameworks (CCA eSign, UIDAI Aadhaar, NPCI NACH, RBI Payment Aggregator).
+standards:
+  - id: http-basic-auth
+    conforms: true
+    evidence: securitySchemes basicAuth (http/basic)
+  - id: oauth2
+    conforms: false
+    evidence: no oauth2 security scheme; HTTP Basic only
+  - id: oidc
+    conforms: false
+  - id: rfc9457-problem-details
+    conforms: false
+    evidence: errors use a custom {code,message,details} envelope, not application/problem+json
+  - id: webhooks
+    conforms: true
+    evidence: asynchronous status delivered via HTTP webhooks (documentation.digio.in/webhooks)
+  - id: rest-json
+    conforms: true
+    evidence: JSON request/response over HTTPS
+  - id: cca-esign
+    conforms: true
+    evidence: CCA-licensed eSign Application Service Provider (Aadhaar/OTP/DSC eSign)
+  - id: uidai-aadhaar
+    conforms: true
+    evidence: UIDAI-authorized Aadhaar-based eSign and eKYC
+  - id: npci-nach
+    conforms: true
+    evidence: NPCI eNACH / NACH mandate registration returning UMRN
+  - id: rbi-payment-aggregator
+    conforms: true
+    evidence: RBI Authorised Payment Aggregator (Certificate of Authorisation No. 166/2024)
+  - id: iso-27001
+    conforms: true
+    evidence: ISO/IEC 27001 information security certification (per digio.in)
+  - id: soc2
+    conforms: true
+    evidence: SOC 2 attestation (per digio.in)
+  - id: dpdpa
+    conforms: true
+    evidence: DPDPA (India Digital Personal Data Protection Act) compliance positioning (CoTrust)

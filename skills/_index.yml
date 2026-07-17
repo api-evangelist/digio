@@ -1,0 +1,25 @@
+generated: '2026-07-17'
+method: generated
+source: openapi/digio-openapi.yml
+notes: >-
+  Packaged Agent Skills GENERATED from the modeled OpenAPI. Every step is grounded in
+  a real operationId present in openapi/digio-openapi.yml. Digio uses HTTP Basic auth;
+  write operations create legally-binding artifacts, so follow the human-in-the-loop
+  guidance in agentic-access/digio-agentic-access.yml.
+skills:
+  - file: digio-esign-document.md
+    name: Collect a legally-valid eSignature on a document
+    api: openapi/digio-openapi.yml
+    operations: [uploadDocumentForSign, getDocument, downloadSignedDocument]
+  - file: digio-create-emandate.md
+    name: Register an eNACH / UPI Autopay recurring-debit mandate
+    api: openapi/digio-openapi.yml
+    operations: [createMandate, getMandate, cancelMandate]
+  - file: digio-run-kyc.md
+    name: Run a DigiKYC identity-verification workflow
+    api: openapi/digio-openapi.yml
+    operations: [createKycRequest, getKycResponse]
+  - file: digio-template-sign.md
+    name: Generate a document from a template and collect eSign
+    api: openapi/digio-openapi.yml
+    operations: [createSignRequestFromTemplate, getDocument, downloadSignedDocument]

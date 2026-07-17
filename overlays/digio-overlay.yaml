@@ -1,0 +1,29 @@
+overlay: 1.0.0
+info:
+  title: API Evangelist enhancements for Digio
+  version: 1.0.0
+extends: openapi/digio-openapi.yml
+actions:
+  - target: $.info
+    update:
+      x-apievangelist-provenance: modeled-from-docs
+      x-apievangelist-auth: http-basic
+      x-apievangelist-country: IN
+      x-apievangelist-products:
+        - DigiSign (eSign)
+        - DigiCollect (eNACH / UPI Autopay)
+        - DigiKYC (KYC / CKYC / KRA / DigiLocker / Video KYC)
+        - DigiDocs (documents / eStamp)
+        - DigiShield (AML/CFT)
+  - target: $.info
+    update:
+      x-apievangelist-webhooks: https://documentation.digio.in/webhooks/
+      x-apievangelist-sandbox-host: https://ext.digio.in
+  - target: "$.tags[?(@.name=='eSign')]"
+    update:
+      x-agentic-consequence: write
+      x-legal-binding: true
+  - target: "$.tags[?(@.name=='eMandate')]"
+    update:
+      x-agentic-consequence: physical
+      x-legal-binding: true

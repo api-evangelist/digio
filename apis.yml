@@ -18,7 +18,7 @@ tags:
 - Fintech
 - Identity Verification
 created: '2026-07-17'
-modified: '2026-07-17'
+modified: '2026-06-20'
 specificationVersion: '0.19'
 apis:
 - aid: digio:digio-esign-api
@@ -158,6 +158,48 @@ common:
   url: finops/digio-finops.yml
 - url: https://www.digio.in/blog/
   type: Blog
+- type: DeveloperPortal
+  url: https://documentation.digio.in/
+- type: Support
+  url: https://www.digio.in/contact-us/
+- type: Pricing
+  url: https://www.digio.in/pricing/
+- type: SignUp
+  url: https://www.digio.in/get-started/
+- type: TermsOfService
+  url: https://www.digio.in/terms-and-conditions/
+- type: PrivacyPolicy
+  url: https://www.digio.in/privacy-policy/
+- type: Postman
+  url: collections/digio.postman_collection.json
+- type: LLMsTxt
+  url: llms/digio-llms.txt
+- type: Packages
+  url: packages/digio-packages.yml
+- type: SDKs
+  url: packages/digio-packages.yml
+- type: MCPServer
+  url: mcp/digio-mcp.yml
+- type: Overlay
+  url: overlays/digio-overlay.yaml
+- type: Conformance
+  url: conformance/digio-conformance.yml
+- type: Compliance
+  url: security/digio-trust-center.yml
+- type: ErrorCatalog
+  url: errors/digio-problem-types.yml
+- type: Lifecycle
+  url: lifecycle/digio-lifecycle.yml
+- type: Conventions
+  url: conventions/digio-conventions.yml
+- type: DataModel
+  url: data-model/digio-data-model.yml
+- type: Webhooks
+  url: asyncapi/digio-webhooks.yml
+- type: AgentSkill
+  url: skills/_index.yml
+- type: Sandbox
+  url: sandbox/digio-sandbox.yml
 maintainers:
 - FN: Kin Lane
   email: kin@apievangelist.com

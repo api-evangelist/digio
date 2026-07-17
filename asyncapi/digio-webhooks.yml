@@ -1,0 +1,48 @@
+generated: '2026-07-17'
+method: searched
+source: https://documentation.digio.in/webhooks/
+spec_type: Webhooks
+notes: >-
+  Digio delivers asynchronous status updates via HTTP webhooks (server-to-server).
+  Webhooks are enabled from the enterprise dashboard profile section; Digio POSTs
+  event payloads to a configured HTTPS endpoint. No published AsyncAPI document
+  exists, so this captures the webhook (event) surface only. Event names below are
+  those Digio documents (e.g. doc.signed, doc.sign.failed) plus the resource status
+  transitions DERIVED from the OpenAPI status enums - re-verify exact event keys
+  against documentation.digio.in/webhooks before production use.
+transport: http-webhook
+configuration:
+  where: Enterprise dashboard -> Profile -> Webhooks
+  method: HTTP POST to a customer-provided HTTPS endpoint
+  docs: https://documentation.digio.in/webhooks/
+events:
+  - name: doc.signed
+    resource: SignDocument
+    description: A signature request was completed / signed.
+  - name: doc.sign.failed
+    resource: SignDocument
+    description: A signature request failed or expired.
+  - name: doc.sign.requested
+    resource: SignDocument
+    description: A signature request was created and is awaiting signer action.
+    derived: true
+  - name: mandate.register.success
+    resource: Mandate
+    description: An eNACH / NACH mandate registration succeeded (UMRN issued).
+    derived: true
+  - name: mandate.register.failed
+    resource: Mandate
+    description: A mandate registration failed.
+    derived: true
+  - name: mandate.cancelled
+    resource: Mandate
+    description: A mandate was cancelled.
+    derived: true
+  - name: kyc.approved
+    resource: KycRequest
+    description: A KYC request was approved.
+    derived: true
+  - name: kyc.rejected
+    resource: KycRequest
+    description: A KYC request was rejected.
+    derived: true

@@ -1,0 +1,28 @@
+generated: '2026-07-17'
+method: derived
+source: openapi/digio-openapi.yml
+versioning:
+  scheme: uri-path
+  observed_versions:
+    - v2 (eSign / document)
+    - v3 (eMandate / NACH)
+    - kyc/v2 (KYC)
+  note: >-
+    Digio versions per product family in the URI path (e.g. /v2/client/document,
+    /v3/client/mandate, /client/kyc/v2). No single global API version is published.
+  docs: https://documentation.digio.in/
+deprecation:
+  policy_url: null
+  sunset_header: unknown
+  note: No published deprecation policy or RFC 8594 Sunset/Deprecation header support was found.
+sla:
+  url: null
+  uptime_target: null
+status_page: null
+async_delivery:
+  webhooks: https://documentation.digio.in/webhooks/
+  note: Asynchronous status changes (signing, mandate registration, KYC) are delivered via HTTP webhooks.
+deprecated_operations: []
+notes: >-
+  No status page, published SLA, or deprecation policy was located for Digio as of
+  2026-07-17. Versioning is observed from the URI paths in the modeled OpenAPI.

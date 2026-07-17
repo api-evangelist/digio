@@ -1,0 +1,30 @@
+generated: '2026-07-17'
+method: searched
+source: https://documentation.digio.in/digienvironments/
+notes: >-
+  Digio separates sandbox and production by HOST, not by key prefix. Each environment
+  issues its own client_id / client_secret from the Digio dashboard; the same HTTP
+  Basic credential does not cross environments. Digio does NOT publish fixed magic
+  test values (test Aadhaar numbers, OTPs, or bank accounts) - sandbox testing uses
+  the sandbox environment with dashboard-issued test credentials and Digio-provided
+  test flows, so no test values are recorded here (none are published to copy verbatim).
+environments:
+  - name: sandbox
+    hosts:
+      - https://ext.digio.in
+      - https://ext-enterprise.digio.in
+    dashboard: sandbox dashboard (dashboard-issued client_id / client_secret)
+    live: false
+  - name: production
+    hosts:
+      - https://api.digio.in
+    dashboard: production dashboard (dashboard-issued client_id / client_secret)
+    live: true
+auth:
+  style: http-basic
+  note: Base64(client_id:client_secret); credentials are environment-scoped.
+free_tier:
+  note: "First 3 document signatures / sign requests are free (per digio.in pricing)."
+docs:
+  - https://documentation.digio.in/digienvironments/
+  - https://documentation.digio.in/digisign/access_digi_sign/
