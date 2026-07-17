@@ -1,0 +1,100 @@
+specification: API Commons Plans
+specificationVersion: '0.1'
+schema: https://raw.githubusercontent.com/api-evangelist/interface-research/main/schema/api-commons.yml#/$defs/Plans
+provider: Digio
+providerId: digio
+created: '2026-07-17'
+modified: '2026-07-17'
+reconciled: false
+tags:
+- eSign
+- KYC
+- eNACH
+- eMandate
+- India
+- Fintech
+- Plans
+description: >-
+  Digio does not publish self-serve, list-price API pricing. Access is via an
+  enterprise/business contract negotiated per product mix (eSign, eStamp, KYC,
+  eNACH, AML), transaction volume, and state-specific eStamp duty requirements.
+  Pricing is transaction-metered and quoted in Indian Rupees (INR). The figures
+  below are indicative market ranges compiled from public third-party sources,
+  not official Digio rate cards, and must be confirmed with Digio sales.
+notes: >-
+  Digio requires contacting bd@digio.in / sales for credentials and pricing;
+  there is no public pay-as-you-go signup. Ranges are indicative only.
+currency: INR
+sources:
+- https://www.digio.in/
+- https://documentation.digio.in/
+- https://productgrowth.in/tools/kyc-identity/digio/
+plans:
+- id: digio-enterprise
+  name: Enterprise / Business Contract
+  type: enterprise
+  description: >-
+    Custom, transaction-metered contract covering the selected Digio products,
+    negotiated on volume. Contact Digio to obtain sandbox and production
+    client_id / client_secret credentials.
+  entries:
+  - label: Aadhaar / OTP eSign
+    name: esign
+    type: usage
+    metric: signatures
+    limit: -1
+    timeFrame: month
+    geo: IN
+    unit: 1
+    price: indicative INR 15-150 per signed document (volume-dependent)
+    userMultiplied: false
+  - label: eStamp facilitation
+    name: estamp
+    type: usage
+    metric: documents
+    limit: -1
+    timeFrame: month
+    geo: IN
+    unit: 1
+    price: indicative INR 30-50 per document on top of state stamp duty
+    userMultiplied: false
+  - label: KYC verification (Aadhaar / DigiLocker / CKYC / KRA / Video KYC)
+    name: kyc
+    type: usage
+    metric: verifications
+    limit: -1
+    timeFrame: month
+    geo: IN
+    unit: 1
+    price: per-transaction, quoted by Digio (Aadhaar eKYC also incurs UIDAI fees)
+    userMultiplied: false
+  - label: eNACH / NACH mandate registration
+    name: enach
+    type: usage
+    metric: mandates
+    limit: -1
+    timeFrame: month
+    geo: IN
+    unit: 1
+    price: per-mandate, quoted by Digio
+    userMultiplied: false
+  - label: AML / CFT screening
+    name: aml
+    type: usage
+    metric: screenings
+    limit: -1
+    timeFrame: month
+    geo: IN
+    unit: 1
+    price: per-screening, quoted by Digio
+    userMultiplied: false
+  elements:
+  - name: DigiSign eSign
+  - name: DigiDocs eStamp
+  - name: DigiKYC
+  - name: DigiCollect eNACH / UPI Autopay
+  - name: DigiShield AML/CFT
+  - name: Sandbox environment (ext.digio.in)
+maintainers:
+- FN: Kin Lane
+  email: kin@apievangelist.com

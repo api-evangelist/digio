@@ -1,0 +1,54 @@
+specification: API Commons Rate Limits
+specificationVersion: '0.1'
+schema: https://raw.githubusercontent.com/api-evangelist/interface-research/main/schema/api-commons.yml#/$defs/RateLimits
+provider: Digio
+providerId: digio
+created: '2026-07-17'
+modified: '2026-07-17'
+reconciled: false
+tags:
+- eSign
+- KYC
+- eNACH
+- India
+- Rate Limiting
+- Quotas
+description: >-
+  Digio does not publish specific numeric API rate limits in its public
+  documentation. Throughput is governed by the negotiated enterprise contract
+  and by underlying regulated rails (UIDAI for Aadhaar, NPCI for eNACH/NACH),
+  each of which imposes its own transaction ceilings. Clients should implement
+  retries with backoff and rely on webhook callbacks for asynchronous status
+  rather than tight polling.
+notes: >-
+  Confirm any per-account throttling and burst limits with Digio during
+  onboarding; values are contract- and product-specific and not publicly listed.
+sources:
+- https://documentation.digio.in/
+- https://www.digio.in/
+responseCodes:
+  throttled: 429
+limits:
+- name: Account throughput
+  scope: account
+  metric: requests
+  limit: see contract / not publicly documented
+  notes: Governed by the enterprise agreement.
+- name: Aadhaar eKYC / eSign
+  scope: regulated-rail
+  metric: transactions
+  limit: subject to UIDAI limits
+  notes: Aadhaar-based flows are bounded by UIDAI ceilings and per-transaction fees.
+- name: eNACH / NACH
+  scope: regulated-rail
+  metric: mandates
+  limit: subject to NPCI limits
+  notes: Mandate registration and debit throughput follow NPCI NACH rules.
+policies:
+- name: Backoff Strategy
+  description: Use exponential backoff with jitter on 429/5xx and honor Retry-After.
+- name: Webhook-first
+  description: Register webhook callbacks for status changes instead of aggressive polling of GET status endpoints.
+maintainers:
+- FN: Kin Lane
+  email: kin@apievangelist.com

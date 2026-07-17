@@ -1,0 +1,37 @@
+generated: '2026-07-17'
+method: probed
+source: live DNS/TLS/HTTP probes of apis.yml + OpenAPI hosts
+hosts:
+- host: api.digio.in
+  https: true
+  http_status: 404
+  remote_ip: 13.206.128.149
+  tls_issuer: Amazon RSA 2048 M01
+  cert_expires: Sep 22 23:59:59 2026 GMT
+  note: Production API host. Root returns 404 (API-only host, no landing page).
+- host: ext.digio.in
+  https: true
+  http_status: 200
+  remote_ip: 65.0.222.86
+  tls_issuer: Amazon RSA 2048 M01
+  cert_expires: Sep 22 23:59:59 2026 GMT
+  note: Sandbox / test API host.
+- host: documentation.digio.in
+  https: true
+  http_status: 200
+  remote_ip: 3.108.92.28
+  tls_issuer: Amazon RSA 2048 M01
+  cert_expires: Sep 22 23:59:59 2026 GMT
+- host: www.digio.in
+  https: true
+  http_status: 200
+  tls_issuer: Amazon RSA 2048 M04
+  cert_expires: Sep 19 23:59:59 2026 GMT
+domains:
+- domain: digio.in
+  hosting: AWS (Amazon-issued RSA TLS certificates; ap-south-1 / India region IPs)
+  tls: All probed hosts serve HTTPS with valid Amazon-issued certificates.
+notes: >-
+  Hosts live-probed 2026-07-17. api.digio.in is the production REST API host;
+  ext.digio.in is the sandbox. All traffic is HTTPS; Digio states bank-grade
+  security with 2-factor authentication in its signing and KYC flows.

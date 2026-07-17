@@ -1,0 +1,35 @@
+generated: '2026-07-17'
+method: searched
+probe: true
+source: https://www.digio.in/
+url: https://www.digio.in/
+certifications:
+- ISO 27001
+- SOC 2
+regulatory:
+- CCA-licensed eSign Application Service Provider (ASP), operating with licensed
+  ESPs/Certifying Authorities (e.g. NSDL e-Governance, CDAC) under Controller of
+  Certifying Authorities (CCA) guidelines.
+- eSign application audited by a CERT-In empaneled auditor for information
+  security and CCA/UIDAI compliance.
+- NPCI NACH / eNACH partner for electronic mandates.
+- UIDAI-authorized for Aadhaar-based eSign and eKYC.
+- RBI Authorised Payment Aggregator (Certificate of Authorisation No. 166/2024).
+evidence:
+- source: https://www.digio.in/
+  keywords:
+  - iso 27001
+  - soc 2
+  - cca licensed esign asp
+  - cert-in empaneled audit
+  - npci nach
+  - uidai aadhaar
+  - rbi payment aggregator
+- source: https://www.digio.in/about-us/
+  keywords:
+  - bank-grade security
+  - regulatory compliance
+notes: >-
+  Digio positions itself as a regulated digital-trust provider for Indian
+  financial services; certifications and approvals sourced from digio.in and
+  corroborating public references (2026-07-17).

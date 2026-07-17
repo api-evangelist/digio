@@ -1,0 +1,68 @@
+aid: digio
+name: Digio
+review:
+  question: Does Digio expose a documented public WebSocket API?
+  answer: false
+  date: '2026-07-17'
+  reviewer: API Evangelist
+  asyncapiSpecCreated: false
+  asyncapiScopeNote: |
+    No AsyncAPI document was created. Digio's platform is a request/response
+    REST API over HTTPS. Asynchronous status changes (signature completed,
+    mandate registered, KYC approved/rejected) are delivered by outbound HTTP
+    webhook callbacks to a client-registered URL, not over a persistent
+    streaming transport. HTTP webhooks are event notifications, not a
+    WebSocket or SSE surface, so no AsyncAPI channel model applies under the
+    current scope.
+findings:
+  summary: |
+    Digio does not publish a documented public WebSocket API. The Digio
+    developer platform (DigiSign eSign, DigiCollect eNACH/NACH, DigiKYC,
+    DigiDocs, DigiShield AML) exposes only REST (HTTPS) endpoints under the
+    production host https://api.digio.in and the sandbox host
+    https://ext.digio.in, authenticated with HTTP Basic
+    (Base64 of client_id:client_secret). Asynchronous lifecycle events are
+    delivered via outbound HTTP webhooks the integrator registers; there is no
+    documented ws:// or wss:// bidirectional or streaming endpoint for eSign,
+    KYC, mandate, or any other product.
+  transports:
+    - protocol: REST
+      scheme: https
+      baseURL: https://api.digio.in
+      documented: true
+    - protocol: REST
+      scheme: https
+      baseURL: https://ext.digio.in
+      documented: true
+      note: Sandbox / test environment.
+    - protocol: Webhook
+      scheme: https
+      documented: true
+      note: Outbound HTTP callbacks to an integrator-registered URL for status events. Not WebSocket.
+    - protocol: WebSocket
+      scheme: wss
+      documented: false
+      note: No WebSocket endpoint is documented in Digio's API documentation, SDKs, or integration guides as of the review date.
+  endpointsConfirmedRest:
+    - POST https://api.digio.in/v2/client/document/upload
+    - POST https://api.digio.in/v2/client/document/uploadpdf
+    - GET  https://api.digio.in/v2/client/document/{document_id}
+    - GET  https://api.digio.in/v2/client/document/download/{document_id}
+    - POST https://api.digio.in/v3/client/mandate/create
+    - GET  https://api.digio.in/v3/client/mandate/{mandate_id}
+    - POST https://api.digio.in/client/kyc/v2/request/with_template
+    - GET  https://api.digio.in/client/kyc/v2/{request_id}/response
+sources:
+  - url: https://documentation.digio.in/
+    type: Documentation
+    note: Documentation portal; all documented integration is REST over HTTPS plus webhooks. No WebSocket mentioned.
+  - url: https://documentation.digio.in/asset-view/asset-environment/
+    type: Documentation
+    note: Sandbox (ext.digio.in) and production (api.digio.in) environments; both REST/HTTPS.
+  - url: https://documentation.digio.in/digisign/
+    type: Documentation
+    note: eSign integration is REST upload plus webhook callbacks; no streaming transport.
+notes: >-
+  Endpoint paths are modeled from Digio's public product documentation
+  (grounded: modeled-from-docs). Hosts api.digio.in and ext.digio.in were
+  live-verified; no WebSocket surface exists on either.

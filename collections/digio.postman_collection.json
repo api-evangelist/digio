@@ -1,0 +1,204 @@
+{
+  "info": {
+    "name": "Digio API",
+    "description": "Modeled-from-docs Postman collection for the Digio API (eSign, eNACH/eMandate, KYC, Documents/eStamp). Production host https://api.digio.in, sandbox https://ext.digio.in. Authentication is HTTP Basic using Base64(client_id:client_secret). Endpoint paths modeled from https://documentation.digio.in/ and verified hosts; confirm exact paths against Digio docs before production use.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "auth": {
+    "type": "basic",
+    "basic": [
+      { "key": "username", "value": "{{client_id}}", "type": "string" },
+      { "key": "password", "value": "{{client_secret}}", "type": "string" }
+    ]
+  },
+  "variable": [
+    { "key": "baseUrl", "value": "https://api.digio.in", "type": "string" },
+    { "key": "client_id", "value": "", "type": "string" },
+    { "key": "client_secret", "value": "", "type": "string" },
+    { "key": "document_id", "value": "", "type": "string" },
+    { "key": "mandate_id", "value": "", "type": "string" },
+    { "key": "request_id", "value": "", "type": "string" }
+  ],
+  "item": [
+    {
+      "name": "eSign (DigiSign)",
+      "item": [
+        {
+          "name": "Upload document and create eSign request",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" },
+              { "key": "Accept", "value": "application/json" }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/v2/client/document/upload",
+              "host": ["{{baseUrl}}"],
+              "path": ["v2", "client", "document", "upload"]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"signers\": [\n    { \"identifier\": \"+919999999999\", \"name\": \"Asha Rao\", \"reason\": \"Loan agreement\", \"sign_type\": \"aadhaar\" }\n  ],\n  \"expire_in_days\": 10,\n  \"display_on_page\": \"all\",\n  \"notify_signers\": true,\n  \"send_sign_link\": true,\n  \"file_name\": \"agreement.pdf\",\n  \"file_data\": \"<base64-encoded-pdf>\"\n}",
+              "options": { "raw": { "language": "json" } }
+            }
+          }
+        },
+        {
+          "name": "Create eSign request from base64 PDF",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" },
+              { "key": "Accept", "value": "application/json" }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/v2/client/document/uploadpdf",
+              "host": ["{{baseUrl}}"],
+              "path": ["v2", "client", "document", "uploadpdf"]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"signers\": [\n    { \"identifier\": \"asha@example.com\", \"name\": \"Asha Rao\", \"sign_type\": \"electronic\" }\n  ],\n  \"file_name\": \"policy.pdf\",\n  \"file_data\": \"<base64-encoded-pdf>\"\n}",
+              "options": { "raw": { "language": "json" } }
+            }
+          }
+        },
+        {
+          "name": "Get eSign request details",
+          "request": {
+            "method": "GET",
+            "header": [ { "key": "Accept", "value": "application/json" } ],
+            "url": {
+              "raw": "{{baseUrl}}/v2/client/document/{{document_id}}",
+              "host": ["{{baseUrl}}"],
+              "path": ["v2", "client", "document", "{{document_id}}"]
+            }
+          }
+        },
+        {
+          "name": "Download signed document",
+          "request": {
+            "method": "GET",
+            "header": [ { "key": "Accept", "value": "application/pdf" } ],
+            "url": {
+              "raw": "{{baseUrl}}/v2/client/document/download/{{document_id}}",
+              "host": ["{{baseUrl}}"],
+              "path": ["v2", "client", "document", "download", "{{document_id}}"]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Documents & eStamp (DigiDocs)",
+      "item": [
+        {
+          "name": "Create sign request from template",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" },
+              { "key": "Accept", "value": "application/json" }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/v2/client/template/multi_templates/create_sign_request",
+              "host": ["{{baseUrl}}"],
+              "path": ["v2", "client", "template", "multi_templates", "create_sign_request"]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"template_id\": \"TMP_LOAN_AGREEMENT\",\n  \"template_values\": { \"borrower_name\": \"Asha Rao\", \"amount\": \"250000\" },\n  \"signers\": [\n    { \"identifier\": \"+919999999999\", \"name\": \"Asha Rao\", \"sign_type\": \"aadhaar\" }\n  ]\n}",
+              "options": { "raw": { "language": "json" } }
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "eMandate / eNACH (DigiCollect)",
+      "item": [
+        {
+          "name": "Create mandate",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" },
+              { "key": "Accept", "value": "application/json" }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/v3/client/mandate/create",
+              "host": ["{{baseUrl}}"],
+              "path": ["v3", "client", "mandate", "create"]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"customer_identifier\": \"+919999999999\",\n  \"auth_mode\": \"upi\",\n  \"mandate_type\": \"create\",\n  \"maximum_amount\": 5000,\n  \"first_collection_date\": \"2026-08-01\",\n  \"frequency\": \"Monthly\",\n  \"destination_bank_id\": \"HDFC0000001\"\n}",
+              "options": { "raw": { "language": "json" } }
+            }
+          }
+        },
+        {
+          "name": "Get mandate details",
+          "request": {
+            "method": "GET",
+            "header": [ { "key": "Accept", "value": "application/json" } ],
+            "url": {
+              "raw": "{{baseUrl}}/v3/client/mandate/{{mandate_id}}",
+              "host": ["{{baseUrl}}"],
+              "path": ["v3", "client", "mandate", "{{mandate_id}}"]
+            }
+          }
+        },
+        {
+          "name": "Cancel mandate",
+          "request": {
+            "method": "POST",
+            "header": [ { "key": "Accept", "value": "application/json" } ],
+            "url": {
+              "raw": "{{baseUrl}}/v3/client/mandate/{{mandate_id}}/cancel",
+              "host": ["{{baseUrl}}"],
+              "path": ["v3", "client", "mandate", "{{mandate_id}}", "cancel"]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "KYC (DigiKYC)",
+      "item": [
+        {
+          "name": "Create KYC request with template",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" },
+              { "key": "Accept", "value": "application/json" }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/client/kyc/v2/request/with_template",
+              "host": ["{{baseUrl}}"],
+              "path": ["client", "kyc", "v2", "request", "with_template"]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"customer_identifier\": \"+919999999999\",\n  \"customer_name\": \"Asha Rao\",\n  \"template_name\": \"DIGILOCKER_AADHAAR_PAN\",\n  \"notify_customer\": true,\n  \"generate_access_token\": true\n}",
+              "options": { "raw": { "language": "json" } }
+            }
+          }
+        },
+        {
+          "name": "Get KYC request response",
+          "request": {
+            "method": "GET",
+            "header": [ { "key": "Accept", "value": "application/json" } ],
+            "url": {
+              "raw": "{{baseUrl}}/client/kyc/v2/{{request_id}}/response",
+              "host": ["{{baseUrl}}"],
+              "path": ["client", "kyc", "v2", "{{request_id}}", "response"]
+            }
+          }
+        }
+      ]
+    }
+  ]
+}

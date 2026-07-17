@@ -1,0 +1,154 @@
+generated: '2026-07-17'
+method: generated
+source: openapi/digio-openapi.yml
+description: Recommended x-agentic-access execution contracts, classified heuristically from
+  the OpenAPI. A governance starting point for exposing this API to AI agents - review and bind
+  audience per deployment. Digio operations act on regulated, legally-binding artifacts
+  (signatures, mandates, KYC), so write/high-consequence operations default to human-in-the-loop.
+  See research/curity/agentic-governance/.
+summary:
+  operations: 10
+  by_action_class:
+    acting: 6
+    connected: 4
+  by_consequence:
+    write: 6
+    read: 4
+  human_in_the_loop_required: 4
+operations:
+- path: /v2/client/document/upload
+  method: post
+  operationId: uploadDocumentForSign
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: required
+      triggers:
+      - legally-binding
+      - high-value
+    audit: required
+- path: /v2/client/document/uploadpdf
+  method: post
+  operationId: uploadPdfForSign
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: required
+      triggers:
+      - legally-binding
+      - high-value
+    audit: required
+- path: /v2/client/document/{document_id}
+  method: get
+  operationId: getDocument
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/client/document/download/{document_id}
+  method: get
+  operationId: downloadSignedDocument
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: required
+    token:
+      max-ttl: 900
+    audit: required
+- path: /v2/client/template/multi_templates/create_sign_request
+  method: post
+  operationId: createSignRequestFromTemplate
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: required
+      triggers:
+      - legally-binding
+      - high-value
+    audit: required
+- path: /v3/client/mandate/create
+  method: post
+  operationId: createMandate
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: required
+      triggers:
+      - financial
+      - legally-binding
+    audit: required
+- path: /v3/client/mandate/{mandate_id}
+  method: get
+  operationId: getMandate
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v3/client/mandate/{mandate_id}/cancel
+  method: post
+  operationId: cancelMandate
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - financial
+      - abnormal
+    audit: required
+- path: /client/kyc/v2/request/with_template
+  method: post
+  operationId: createKycRequest
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - pii
+      - abnormal
+    audit: required
+- path: /client/kyc/v2/{request_id}/response
+  method: get
+  operationId: getKycResponse
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: required
+    token:
+      max-ttl: 900
+    audit: required

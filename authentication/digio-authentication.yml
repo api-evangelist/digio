@@ -1,0 +1,19 @@
+generated: '2026-07-17'
+method: derived
+source: openapi/digio-openapi.yml
+summary:
+  types:
+  - http
+schemes:
+- name: basicAuth
+  type: http
+  scheme: basic
+  bearerFormat: null
+  note: >-
+    HTTP Basic authentication. Send Authorization: Basic
+    Base64(client_id:client_secret) with Content-Type application/json. The
+    client_id and client_secret are issued per environment (sandbox
+    ext.digio.in and production api.digio.in) from the Digio dashboard.
+  sources:
+  - openapi/digio-openapi.yml
+  - https://documentation.digio.in/
