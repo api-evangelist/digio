@@ -1,0 +1,172 @@
+openapi: 3.0.3
+info:
+  title: Digio Documents eMandate API
+  description: Digio is an India-based digital trust and paperwork automation platform offering legally-valid Aadhaar/OTP eSign, eStamping, KYC (CKYC, KRA, DigiLocker, offline Aadhaar, Video KYC), eNACH/NACH eMandates, UPI Autopay, AML/CFT screening, and document/agreement management over a REST API. All requests use HTTPS with HTTP Basic authentication (Base64 of client_id:client_secret). Asynchronous status updates are delivered via HTTP webhooks; there is no WebSocket surface.
+  version: '1.0'
+  contact:
+    name: Digio Developer Support
+    url: https://documentation.digio.in/
+    email: tech@digio.in
+  termsOfService: https://www.digio.in/
+servers:
+- url: https://api.digio.in
+  description: Production
+- url: https://ext.digio.in
+  description: Sandbox / Test
+security:
+- basicAuth: []
+tags:
+- name: eMandate
+  description: DigiCollect - eNACH / NACH electronic mandates for recurring debit.
+paths:
+  /v3/client/mandate/create:
+    post:
+      operationId: createMandate
+      tags:
+      - eMandate
+      summary: Create an eNACH / NACH mandate
+      description: Creates an electronic mandate (eNACH via NPCI, UPI Autopay, or physical NACH) authorizing recurring debit from a customer bank account. Returns a mandate id prefixed with NACH/MANDATE.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateMandateRequest'
+      responses:
+        '200':
+          description: Mandate created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Mandate'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /v3/client/mandate/{mandate_id}:
+    get:
+      operationId: getMandate
+      tags:
+      - eMandate
+      summary: Get mandate details
+      description: Retrieves the status and details of an eNACH / NACH mandate.
+      parameters:
+      - $ref: '#/components/parameters/MandateId'
+      responses:
+        '200':
+          description: Mandate details
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Mandate'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /v3/client/mandate/{mandate_id}/cancel:
+    post:
+      operationId: cancelMandate
+      tags:
+      - eMandate
+      summary: Cancel a mandate
+      description: Cancels an active eNACH / NACH mandate.
+      parameters:
+      - $ref: '#/components/parameters/MandateId'
+      responses:
+        '200':
+          description: Mandate cancelled
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Mandate'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+components:
+  schemas:
+    Error:
+      type: object
+      properties:
+        code:
+          type: integer
+        message:
+          type: string
+        details:
+          type: string
+    Mandate:
+      type: object
+      properties:
+        mandate_id:
+          type: string
+        state:
+          type: string
+          enum:
+          - register_initiated
+          - register_success
+          - register_failed
+          - cancelled
+        npci_txn_id:
+          type: string
+        umrn:
+          type: string
+          description: Unique Mandate Reference Number issued by NPCI.
+        maximum_amount:
+          type: number
+        created_at:
+          type: string
+          format: date-time
+    CreateMandateRequest:
+      type: object
+      properties:
+        customer_identifier:
+          type: string
+          description: Customer email or phone number.
+        auth_mode:
+          type: string
+          description: Mandate authentication mode.
+          enum:
+          - netbanking
+          - debit_card
+          - aadhaar
+          - upi
+        mandate_type:
+          type: string
+          enum:
+          - create
+          - modify
+          - cancel
+        maximum_amount:
+          type: number
+        first_collection_date:
+          type: string
+          format: date
+        final_collection_date:
+          type: string
+          format: date
+        frequency:
+          type: string
+          enum:
+          - Adhoc
+          - Monthly
+          - Quarterly
+          - Yearly
+        destination_bank_id:
+          type: string
+      required:
+      - customer_identifier
+      - maximum_amount
+  responses:
+    Unauthorized:
+      description: Missing or invalid Basic authentication credentials.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+  parameters:
+    MandateId:
+      name: mandate_id
+      in: path
+      required: true
+      description: Mandate identifier.
+      schema:
+        type: string
+  securitySchemes:
+    basicAuth:
+      type: http
+      scheme: basic
+      description: 'HTTP Basic authentication. Send the header Authorization: Basic Base64(client_id:client_secret).'

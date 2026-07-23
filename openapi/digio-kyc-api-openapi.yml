@@ -1,0 +1,137 @@
+openapi: 3.0.3
+info:
+  title: Digio Documents KYC API
+  description: Digio is an India-based digital trust and paperwork automation platform offering legally-valid Aadhaar/OTP eSign, eStamping, KYC (CKYC, KRA, DigiLocker, offline Aadhaar, Video KYC), eNACH/NACH eMandates, UPI Autopay, AML/CFT screening, and document/agreement management over a REST API. All requests use HTTPS with HTTP Basic authentication (Base64 of client_id:client_secret). Asynchronous status updates are delivered via HTTP webhooks; there is no WebSocket surface.
+  version: '1.0'
+  contact:
+    name: Digio Developer Support
+    url: https://documentation.digio.in/
+    email: tech@digio.in
+  termsOfService: https://www.digio.in/
+servers:
+- url: https://api.digio.in
+  description: Production
+- url: https://ext.digio.in
+  description: Sandbox / Test
+security:
+- basicAuth: []
+tags:
+- name: KYC
+  description: DigiKYC - identity verification via CKYC, KRA, DigiLocker, and offline Aadhaar.
+paths:
+  /client/kyc/v2/request/with_template:
+    post:
+      operationId: createKycRequest
+      tags:
+      - KYC
+      summary: Create a KYC request with a template
+      description: Initiates a KYC verification workflow using a pre-configured DigiKYC template (Aadhaar offline, DigiLocker, ID proof, CKYC, KRA, Video KYC). Returns a request id prefixed with KID.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/KycRequest'
+      responses:
+        '200':
+          description: KYC request created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/KycResponse'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /client/kyc/v2/{request_id}/response:
+    get:
+      operationId: getKycResponse
+      tags:
+      - KYC
+      summary: Get KYC request response
+      description: Fetches the collected identity data, extracted fields, and verification result for a completed KYC request.
+      parameters:
+      - name: request_id
+        in: path
+        required: true
+        description: KYC request identifier (KID...).
+        schema:
+          type: string
+      responses:
+        '200':
+          description: KYC response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/KycResponse'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+components:
+  schemas:
+    KycResponse:
+      type: object
+      properties:
+        id:
+          type: string
+          description: KYC request identifier (KID...).
+        status:
+          type: string
+          enum:
+          - requested
+          - approval_pending
+          - approved
+          - rejected
+        customer_identifier:
+          type: string
+        actions:
+          type: array
+          items:
+            type: object
+            properties:
+              type:
+                type: string
+              status:
+                type: string
+              details:
+                type: object
+                additionalProperties: true
+        created_at:
+          type: string
+          format: date-time
+    Error:
+      type: object
+      properties:
+        code:
+          type: integer
+        message:
+          type: string
+        details:
+          type: string
+    KycRequest:
+      type: object
+      properties:
+        customer_identifier:
+          type: string
+          description: Customer email or phone number.
+        customer_name:
+          type: string
+        template_name:
+          type: string
+          description: DigiKYC workflow template name.
+        notify_customer:
+          type: boolean
+        generate_access_token:
+          type: boolean
+      required:
+      - customer_identifier
+      - template_name
+  responses:
+    Unauthorized:
+      description: Missing or invalid Basic authentication credentials.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+  securitySchemes:
+    basicAuth:
+      type: http
+      scheme: basic
+      description: 'HTTP Basic authentication. Send the header Authorization: Basic Base64(client_id:client_secret).'

@@ -1,0 +1,137 @@
+openapi: 3.0.3
+info:
+  title: Digio Documents API
+  description: Digio is an India-based digital trust and paperwork automation platform offering legally-valid Aadhaar/OTP eSign, eStamping, KYC (CKYC, KRA, DigiLocker, offline Aadhaar, Video KYC), eNACH/NACH eMandates, UPI Autopay, AML/CFT screening, and document/agreement management over a REST API. All requests use HTTPS with HTTP Basic authentication (Base64 of client_id:client_secret). Asynchronous status updates are delivered via HTTP webhooks; there is no WebSocket surface.
+  version: '1.0'
+  contact:
+    name: Digio Developer Support
+    url: https://documentation.digio.in/
+    email: tech@digio.in
+  termsOfService: https://www.digio.in/
+servers:
+- url: https://api.digio.in
+  description: Production
+- url: https://ext.digio.in
+  description: Sandbox / Test
+security:
+- basicAuth: []
+tags:
+- name: Documents
+  description: DigiDocs - template-based document and agreement creation with eStamp.
+paths:
+  /v2/client/template/multi_templates/create_sign_request:
+    post:
+      operationId: createSignRequestFromTemplate
+      tags:
+      - Documents
+      summary: Create a sign request from a template
+      description: Generates a document from a pre-configured DigiDocs template (with optional eStamp) and creates an eSign request in one call.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TemplateSignRequest'
+      responses:
+        '200':
+          description: Sign request created from template
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SignDocument'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+components:
+  schemas:
+    TemplateSignRequest:
+      type: object
+      properties:
+        template_values:
+          type: object
+          additionalProperties: true
+        template_id:
+          type: string
+        signers:
+          type: array
+          items:
+            $ref: '#/components/schemas/Signer'
+      required:
+      - template_id
+      - signers
+    Error:
+      type: object
+      properties:
+        code:
+          type: integer
+        message:
+          type: string
+        details:
+          type: string
+    SignDocument:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Document identifier (DID...).
+        is_agreement:
+          type: boolean
+        agreement_type:
+          type: string
+        signing_parties:
+          type: array
+          items:
+            type: object
+            properties:
+              name:
+                type: string
+              identifier:
+                type: string
+              status:
+                type: string
+                enum:
+                - requested
+                - signed
+                - expired
+        file_name:
+          type: string
+        created_at:
+          type: string
+          format: date-time
+        agreement_status:
+          type: string
+          enum:
+          - requested
+          - completed
+          - expired
+    Signer:
+      type: object
+      properties:
+        identifier:
+          type: string
+          description: A single signer identifier - either an email address or a phone number.
+        name:
+          type: string
+        reason:
+          type: string
+          description: Reason for signing.
+        sign_type:
+          type: string
+          description: Signature type.
+          enum:
+          - aadhaar
+          - electronic
+          - dsc
+      required:
+      - identifier
+  responses:
+    Unauthorized:
+      description: Missing or invalid Basic authentication credentials.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+  securitySchemes:
+    basicAuth:
+      type: http
+      scheme: basic
+      description: 'HTTP Basic authentication. Send the header Authorization: Basic Base64(client_id:client_secret).'

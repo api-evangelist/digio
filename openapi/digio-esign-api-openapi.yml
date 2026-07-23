@@ -1,0 +1,220 @@
+openapi: 3.0.3
+info:
+  title: Digio Documents eSign API
+  description: Digio is an India-based digital trust and paperwork automation platform offering legally-valid Aadhaar/OTP eSign, eStamping, KYC (CKYC, KRA, DigiLocker, offline Aadhaar, Video KYC), eNACH/NACH eMandates, UPI Autopay, AML/CFT screening, and document/agreement management over a REST API. All requests use HTTPS with HTTP Basic authentication (Base64 of client_id:client_secret). Asynchronous status updates are delivered via HTTP webhooks; there is no WebSocket surface.
+  version: '1.0'
+  contact:
+    name: Digio Developer Support
+    url: https://documentation.digio.in/
+    email: tech@digio.in
+  termsOfService: https://www.digio.in/
+servers:
+- url: https://api.digio.in
+  description: Production
+- url: https://ext.digio.in
+  description: Sandbox / Test
+security:
+- basicAuth: []
+tags:
+- name: eSign
+  description: DigiSign - Aadhaar and OTP based legally-valid electronic signatures.
+paths:
+  /v2/client/document/upload:
+    post:
+      operationId: uploadDocumentForSign
+      tags:
+      - eSign
+      summary: Upload a document and create an eSign request
+      description: Uploads a PDF file and creates a signature request for one or more signers (identified by a single email or phone number). Returns a document id prefixed with DID.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UploadDocumentRequest'
+      responses:
+        '200':
+          description: Sign request created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SignDocument'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /v2/client/document/uploadpdf:
+    post:
+      operationId: uploadPdfForSign
+      tags:
+      - eSign
+      summary: Create an eSign request from a base64 PDF
+      description: Creates a signature request from a base64-encoded PDF payload rather than a multipart file upload.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UploadPdfRequest'
+      responses:
+        '200':
+          description: Sign request created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SignDocument'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /v2/client/document/{document_id}:
+    get:
+      operationId: getDocument
+      tags:
+      - eSign
+      summary: Get eSign request details
+      description: Retrieves the current status and signer details of a signature request.
+      parameters:
+      - $ref: '#/components/parameters/DocumentId'
+      responses:
+        '200':
+          description: Document details
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SignDocument'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /v2/client/document/download/{document_id}:
+    get:
+      operationId: downloadSignedDocument
+      tags:
+      - eSign
+      summary: Download a signed document
+      description: Downloads the completed, signed PDF for a signature request.
+      parameters:
+      - $ref: '#/components/parameters/DocumentId'
+      responses:
+        '200':
+          description: Signed PDF
+          content:
+            application/pdf:
+              schema:
+                type: string
+                format: binary
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+components:
+  parameters:
+    DocumentId:
+      name: document_id
+      in: path
+      required: true
+      description: Signature request identifier (DID...).
+      schema:
+        type: string
+  schemas:
+    Error:
+      type: object
+      properties:
+        code:
+          type: integer
+        message:
+          type: string
+        details:
+          type: string
+    SignDocument:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Document identifier (DID...).
+        is_agreement:
+          type: boolean
+        agreement_type:
+          type: string
+        signing_parties:
+          type: array
+          items:
+            type: object
+            properties:
+              name:
+                type: string
+              identifier:
+                type: string
+              status:
+                type: string
+                enum:
+                - requested
+                - signed
+                - expired
+        file_name:
+          type: string
+        created_at:
+          type: string
+          format: date-time
+        agreement_status:
+          type: string
+          enum:
+          - requested
+          - completed
+          - expired
+    UploadDocumentRequest:
+      type: object
+      properties:
+        signers:
+          type: array
+          items:
+            $ref: '#/components/schemas/Signer'
+        expire_in_days:
+          type: integer
+        display_on_page:
+          type: string
+          enum:
+          - first
+          - last
+          - all
+          - custom
+        notify_signers:
+          type: boolean
+        send_sign_link:
+          type: boolean
+        file_name:
+          type: string
+        file_data:
+          type: string
+          description: Base64-encoded PDF content.
+      required:
+      - signers
+      - file_name
+    UploadPdfRequest:
+      allOf:
+      - $ref: '#/components/schemas/UploadDocumentRequest'
+    Signer:
+      type: object
+      properties:
+        identifier:
+          type: string
+          description: A single signer identifier - either an email address or a phone number.
+        name:
+          type: string
+        reason:
+          type: string
+          description: Reason for signing.
+        sign_type:
+          type: string
+          description: Signature type.
+          enum:
+          - aadhaar
+          - electronic
+          - dsc
+      required:
+      - identifier
+  responses:
+    Unauthorized:
+      description: Missing or invalid Basic authentication credentials.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+  securitySchemes:
+    basicAuth:
+      type: http
+      scheme: basic
+      description: 'HTTP Basic authentication. Send the header Authorization: Basic Base64(client_id:client_secret).'
