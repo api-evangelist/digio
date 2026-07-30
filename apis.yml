@@ -7,7 +7,20 @@ description: Digio is an India-based digital trust and paperwork automation plat
   KRA, DigiLocker, offline Aadhaar, and Video KYC), eNACH/NACH eMandates and UPI
   Autopay recurring payments, AML/CFT screening, and template-based document and
   agreement management. All endpoints use HTTPS with HTTP Basic authentication.
-image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+accessModel:
+  pricing: paid
+  onboarding: self-serve
+  trial: false
+  try_now: false
+  public: false
+  label: Paid · Self-serve signup
+  confidence: high
+  source:
+  - plans
+  - authentication
+  generated: '2026-07-22'
+  method: derived
+image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/digio.png
 tags:
 - eSign
 - KYC
@@ -21,68 +34,6 @@ created: '2026-07-17'
 modified: '2026-06-20'
 specificationVersion: '0.19'
 apis:
-- aid: digio:digio-esign-api
-  name: Digio eSign API
-  tags:
-  - eSign
-  - Aadhaar
-  - Digital Signature
-  - DigiSign
-  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
-  humanURL: https://documentation.digio.in/digisign/
-  baseURL: https://api.digio.in
-  properties:
-  - url: https://documentation.digio.in/digisign/
-    type: Documentation
-  - url: https://documentation.digio.in/digisign/api_integration/create_sign_request/
-    type: APIReference
-  - url: openapi/digio-openapi.yml
-    type: OpenAPI
-  description: DigiSign - upload a PDF or template and collect legally-valid
-    Aadhaar-based, OTP-based, or DSC electronic signatures, with signer tracking
-    and signed-document download.
-- aid: digio:digio-emandate-enach-api
-  name: Digio eMandate (eNACH) API
-  tags:
-  - eNACH
-  - eMandate
-  - NACH
-  - DigiCollect
-  - Recurring Payments
-  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
-  humanURL: https://documentation.digio.in/digicollect/nach/nach_registration/
-  baseURL: https://api.digio.in
-  properties:
-  - url: https://documentation.digio.in/digicollect/nach/nach_registration/
-    type: Documentation
-  - url: https://documentation.digio.in/digicollect/nach/nach_registration/get_mandate_details/
-    type: APIReference
-  - url: openapi/digio-openapi.yml
-    type: OpenAPI
-  description: DigiCollect - create and manage NPCI eNACH electronic mandates,
-    physical NACH, and UPI Autopay authorizations for recurring debit, returning
-    a UMRN (Unique Mandate Reference Number).
-- aid: digio:digio-kyc-api
-  name: Digio KYC API
-  tags:
-  - KYC
-  - Identity Verification
-  - CKYC
-  - KRA
-  - Video KYC
-  - DigiKYC
-  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
-  humanURL: https://documentation.digio.in/digikyc/
-  baseURL: https://api.digio.in
-  properties:
-  - url: https://documentation.digio.in/digikyc/
-    type: Documentation
-  - url: https://documentation.digio.in/digikyc/ckyc/api_integration/
-    type: APIReference
-  - url: openapi/digio-openapi.yml
-    type: OpenAPI
-  description: DigiKYC - template-driven identity verification workflows spanning
-    CKYC, KRA, DigiLocker, ID-proof capture, offline Aadhaar, and Video KYC.
 - aid: digio:digio-digilocker-api
   name: Digio DigiLocker API
   tags:
@@ -95,27 +46,9 @@ apis:
   properties:
   - url: https://documentation.digio.in/digikyc/digilocker/
     type: Documentation
-  description: Fetch government-issued documents (Aadhaar, PAN, driving licence and
-    others) directly from India's DigiLocker with citizen consent for KYC.
-- aid: digio:digio-documents-estamp-api
-  name: Digio Documents & eStamp API
-  tags:
-  - Documents
-  - eStamp
-  - Agreements
-  - DigiDocs
-  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
-  humanURL: https://documentation.digio.in/digidocs/
-  baseURL: https://api.digio.in
-  properties:
-  - url: https://documentation.digio.in/digidocs/
-    type: Documentation
-  - url: https://documentation.digio.in/digidocs/api_integration/create_document_from_template_api/
-    type: APIReference
-  - url: openapi/digio-openapi.yml
-    type: OpenAPI
-  description: DigiDocs - generate agreements and documents from templates with
-    state-specific eStamp duty collection, then route them into an eSign request.
+  description: >-
+    Fetch government-issued documents (Aadhaar, PAN, driving licence and others) directly from India's
+    DigiLocker with citizen consent for KYC.
 - aid: digio:digio-aml-cft-api
   name: Digio AML/CFT API
   tags:
@@ -129,9 +62,120 @@ apis:
   properties:
   - url: https://www.digio.in/
     type: Documentation
-  description: DigiShield - Anti-Money-Laundering and Counter-Financing-of-Terrorism
-    screening and ongoing monitoring against sanctions and watchlists.
+  description: >-
+    DigiShield - Anti-Money-Laundering and Counter-Financing-of-Terrorism screening and ongoing monitoring
+    against sanctions and watchlists.
+- aid: digio:digio-documents-api
+  name: Digio Documents API
+  description: DigiDocs - template-based document and agreement creation with eStamp.
+  humanURL: https://documentation.digio.in/digisign/
+  baseURL: https://api.digio.in
+  tags:
+  - Documents
+  properties:
+  - type: OpenAPI
+    url: openapi/digio-documents-api-openapi.yml
+  - type: Documentation
+    url: https://documentation.digio.in/digisign/
+  - type: APIReference
+    url: https://documentation.digio.in/digisign/api_integration/create_sign_request/
+  - type: Documentation
+    url: https://documentation.digio.in/digicollect/nach/nach_registration/
+  - type: APIReference
+    url: https://documentation.digio.in/digicollect/nach/nach_registration/get_mandate_details/
+  - type: Documentation
+    url: https://documentation.digio.in/digikyc/
+  - type: APIReference
+    url: https://documentation.digio.in/digikyc/ckyc/api_integration/
+  - type: Documentation
+    url: https://documentation.digio.in/digidocs/
+  - type: APIReference
+    url: >-
+      https://documentation.digio.in/digidocs/api_integration/create_document_from_template_api/
+- aid: digio:digio-emandate-api
+  name: Digio eMandate API
+  description: DigiCollect - eNACH / NACH electronic mandates for recurring debit.
+  humanURL: https://documentation.digio.in/digisign/
+  baseURL: https://api.digio.in
+  tags:
+  - eMandate
+  properties:
+  - type: OpenAPI
+    url: openapi/digio-emandate-api-openapi.yml
+  - type: Documentation
+    url: https://documentation.digio.in/digisign/
+  - type: APIReference
+    url: https://documentation.digio.in/digisign/api_integration/create_sign_request/
+  - type: Documentation
+    url: https://documentation.digio.in/digicollect/nach/nach_registration/
+  - type: APIReference
+    url: https://documentation.digio.in/digicollect/nach/nach_registration/get_mandate_details/
+  - type: Documentation
+    url: https://documentation.digio.in/digikyc/
+  - type: APIReference
+    url: https://documentation.digio.in/digikyc/ckyc/api_integration/
+  - type: Documentation
+    url: https://documentation.digio.in/digidocs/
+  - type: APIReference
+    url: >-
+      https://documentation.digio.in/digidocs/api_integration/create_document_from_template_api/
+- aid: digio:digio-esign-api
+  name: Digio eSign API
+  description: DigiSign - Aadhaar and OTP based legally-valid electronic signatures.
+  humanURL: https://documentation.digio.in/digisign/
+  baseURL: https://api.digio.in
+  tags:
+  - eSign
+  properties:
+  - type: OpenAPI
+    url: openapi/digio-esign-api-openapi.yml
+  - type: Documentation
+    url: https://documentation.digio.in/digisign/
+  - type: APIReference
+    url: https://documentation.digio.in/digisign/api_integration/create_sign_request/
+  - type: Documentation
+    url: https://documentation.digio.in/digicollect/nach/nach_registration/
+  - type: APIReference
+    url: https://documentation.digio.in/digicollect/nach/nach_registration/get_mandate_details/
+  - type: Documentation
+    url: https://documentation.digio.in/digikyc/
+  - type: APIReference
+    url: https://documentation.digio.in/digikyc/ckyc/api_integration/
+  - type: Documentation
+    url: https://documentation.digio.in/digidocs/
+  - type: APIReference
+    url: >-
+      https://documentation.digio.in/digidocs/api_integration/create_document_from_template_api/
+- aid: digio:digio-kyc-api
+  name: Digio KYC API
+  description: DigiKYC - identity verification via CKYC, KRA, DigiLocker, and offline Aadhaar.
+  humanURL: https://documentation.digio.in/digisign/
+  baseURL: https://api.digio.in
+  tags:
+  - KYC
+  properties:
+  - type: OpenAPI
+    url: openapi/digio-kyc-api-openapi.yml
+  - type: Documentation
+    url: https://documentation.digio.in/digisign/
+  - type: APIReference
+    url: https://documentation.digio.in/digisign/api_integration/create_sign_request/
+  - type: Documentation
+    url: https://documentation.digio.in/digicollect/nach/nach_registration/
+  - type: APIReference
+    url: https://documentation.digio.in/digicollect/nach/nach_registration/get_mandate_details/
+  - type: Documentation
+    url: https://documentation.digio.in/digikyc/
+  - type: APIReference
+    url: https://documentation.digio.in/digikyc/ckyc/api_integration/
+  - type: Documentation
+    url: https://documentation.digio.in/digidocs/
+  - type: APIReference
+    url: >-
+      https://documentation.digio.in/digidocs/api_integration/create_document_from_template_api/
 common:
+- type: PostmanWorkspace
+  url: https://www.postman.com/kinlaneapi/digio/overview
 - type: AgenticAccess
   url: agentic-access/digio-agentic-access.yml
 - type: TrustCenter
