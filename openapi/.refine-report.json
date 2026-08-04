@@ -1,0 +1,20 @@
+{
+  "provider": "digio",
+  "sources": [
+    "digio-documents-api-openapi.yml",
+    "digio-emandate-api-openapi.yml",
+    "digio-esign-api-openapi.yml",
+    "digio-kyc-api-openapi.yml"
+  ],
+  "outputs": [
+    "digio-documents-api-openapi.yml",
+    "digio-emandate-api-openapi.yml",
+    "digio-esign-api-openapi.yml",
+    "digio-kyc-api-openapi.yml"
+  ],
+  "archived": [],
+  "errors": [],
+  "warnings": [],
+  "notes": [],
+  "skipped": []
+}

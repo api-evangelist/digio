@@ -1,0 +1,249 @@
+{
+  "info": {
+    "_postman_id": "a05b1c35-34bd-4289-8cfb-0d1a2177a3f9",
+    "name": "Digio Documents API",
+    "description": "Digio is an India-based digital trust and paperwork automation platform offering legally-valid Aadhaar/OTP eSign, eStamping, KYC (CKYC, KRA, DigiLocker, offline Aadhaar, Video KYC), eNACH/NACH eMandates, UPI Autopay, AML/CFT screening, and document/agreement management over a REST API. All requests use HTTPS with HTTP Basic authentication (Base64 of client_id:client_secret). Asynchronous status updates are delivered via HTTP webhooks; there is no WebSocket surface.\n\nContact Support:\n Name: Digio Developer Support\n Email: tech@digio.in",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T01:30:29.000Z",
+    "updatedAt": "2026-07-28T01:30:29.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-a05b1c35-34bd-4289-8cfb-0d1a2177a3f9"
+  },
+  "item": [
+    {
+      "name": "v2",
+      "item": [
+        {
+          "name": "client",
+          "item": [
+            {
+              "name": "template",
+              "item": [
+                {
+                  "name": "multi_templates",
+                  "item": [
+                    {
+                      "name": "create_sign_request",
+                      "item": [
+                        {
+                          "name": "Create a sign request from a template",
+                          "id": "1d75469c-223b-4a22-a0cf-c970053ad90c",
+                          "protocolProfileBehavior": {
+                            "disableBodyPruning": true
+                          },
+                          "request": {
+                            "method": "POST",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"template_id\": \"<string>\",\n  \"signers\": [\n    {\n      \"identifier\": \"<string>\",\n      \"name\": \"<string>\",\n      \"reason\": \"<string>\",\n      \"sign_type\": \"dsc\"\n    },\n    {\n      \"identifier\": \"<string>\",\n      \"name\": \"<string>\",\n      \"reason\": \"<string>\",\n      \"sign_type\": \"aadhaar\"\n    }\n  ],\n  \"template_values\": {\n    \"exercitation_0\": 1266314,\n    \"est_261\": 44157661.33774018\n  }\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/v2/client/template/multi_templates/create_sign_request",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "v2",
+                                "client",
+                                "template",
+                                "multi_templates",
+                                "create_sign_request"
+                              ]
+                            },
+                            "description": "Generates a document from a pre-configured DigiDocs template (with optional eStamp) and creates an eSign request in one call."
+                          },
+                          "response": [
+                            {
+                              "id": "6b250863-f279-4aaf-922c-0ad0d57c84d9",
+                              "name": "Sign request created from template",
+                              "originalRequest": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: basic",
+                                    "key": "Authorization",
+                                    "value": "Basic <credentials>"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "{\n  \"template_id\": \"<string>\",\n  \"signers\": [\n    {\n      \"identifier\": \"<string>\",\n      \"name\": \"<string>\",\n      \"reason\": \"<string>\",\n      \"sign_type\": \"dsc\"\n    },\n    {\n      \"identifier\": \"<string>\",\n      \"name\": \"<string>\",\n      \"reason\": \"<string>\",\n      \"sign_type\": \"aadhaar\"\n    }\n  ],\n  \"template_values\": {\n    \"exercitation_0\": 1266314,\n    \"est_261\": 44157661.33774018\n  }\n}",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "json",
+                                      "language": "json"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/v2/client/template/multi_templates/create_sign_request",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "v2",
+                                    "client",
+                                    "template",
+                                    "multi_templates",
+                                    "create_sign_request"
+                                  ]
+                                }
+                              },
+                              "status": "OK",
+                              "code": 200,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"id\": \"<string>\",\n  \"is_agreement\": \"<boolean>\",\n  \"agreement_type\": \"<string>\",\n  \"signing_parties\": [\n    {\n      \"name\": \"<string>\",\n      \"identifier\": \"<string>\",\n      \"status\": \"requested\"\n    },\n    {\n      \"name\": \"<string>\",\n      \"identifier\": \"<string>\",\n      \"status\": \"requested\"\n    }\n  ],\n  \"file_name\": \"<string>\",\n  \"created_at\": \"<dateTime>\",\n  \"agreement_status\": \"requested\"\n}",
+                              "createdAt": "2026-07-28T01:30:29.000Z",
+                              "updatedAt": "2026-07-28T01:30:29.000Z",
+                              "uid": "35240-6b250863-f279-4aaf-922c-0ad0d57c84d9"
+                            },
+                            {
+                              "id": "32c008b0-ba53-4cc3-b530-ae92e31a17ef",
+                              "name": "Missing or invalid Basic authentication credentials.",
+                              "originalRequest": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: basic",
+                                    "key": "Authorization",
+                                    "value": "Basic <credentials>"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "{\n  \"template_id\": \"<string>\",\n  \"signers\": [\n    {\n      \"identifier\": \"<string>\",\n      \"name\": \"<string>\",\n      \"reason\": \"<string>\",\n      \"sign_type\": \"dsc\"\n    },\n    {\n      \"identifier\": \"<string>\",\n      \"name\": \"<string>\",\n      \"reason\": \"<string>\",\n      \"sign_type\": \"aadhaar\"\n    }\n  ],\n  \"template_values\": {\n    \"exercitation_0\": 1266314,\n    \"est_261\": 44157661.33774018\n  }\n}",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "json",
+                                      "language": "json"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/v2/client/template/multi_templates/create_sign_request",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "v2",
+                                    "client",
+                                    "template",
+                                    "multi_templates",
+                                    "create_sign_request"
+                                  ]
+                                }
+                              },
+                              "status": "Unauthorized",
+                              "code": 401,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"code\": \"<integer>\",\n  \"message\": \"<string>\",\n  \"details\": \"<string>\"\n}",
+                              "createdAt": "2026-07-28T01:30:29.000Z",
+                              "updatedAt": "2026-07-28T01:30:29.000Z",
+                              "uid": "35240-32c008b0-ba53-4cc3-b530-ae92e31a17ef"
+                            }
+                          ],
+                          "createdAt": "2026-07-28T01:30:29.000Z",
+                          "updatedAt": "2026-07-28T01:30:29.000Z",
+                          "uid": "35240-1d75469c-223b-4a22-a0cf-c970053ad90c"
+                        }
+                      ],
+                      "id": "bcdd249a-bbbe-4d49-afc2-6408c30a5cd4",
+                      "createdAt": "2026-07-28T01:30:29.000Z",
+                      "updatedAt": "2026-07-28T01:30:29.000Z",
+                      "uid": "35240-bcdd249a-bbbe-4d49-afc2-6408c30a5cd4"
+                    }
+                  ],
+                  "id": "4f3fae1e-f827-432d-9443-cd0ca8875e0d",
+                  "createdAt": "2026-07-28T01:30:29.000Z",
+                  "updatedAt": "2026-07-28T01:30:29.000Z",
+                  "uid": "35240-4f3fae1e-f827-432d-9443-cd0ca8875e0d"
+                }
+              ],
+              "id": "efd8cb86-0608-420c-955b-a11f76b77efa",
+              "createdAt": "2026-07-28T01:30:29.000Z",
+              "updatedAt": "2026-07-28T01:30:29.000Z",
+              "uid": "35240-efd8cb86-0608-420c-955b-a11f76b77efa"
+            }
+          ],
+          "id": "1bd103ed-fd29-46af-b087-b6e19d259f3d",
+          "createdAt": "2026-07-28T01:30:29.000Z",
+          "updatedAt": "2026-07-28T01:30:29.000Z",
+          "uid": "35240-1bd103ed-fd29-46af-b087-b6e19d259f3d"
+        }
+      ],
+      "id": "a3185de3-c7dc-47b0-ad9c-c8797e011933",
+      "createdAt": "2026-07-28T01:30:29.000Z",
+      "updatedAt": "2026-07-28T01:30:29.000Z",
+      "uid": "35240-a3185de3-c7dc-47b0-ad9c-c8797e011933"
+    }
+  ],
+  "auth": {
+    "type": "basic",
+    "basic": [
+      {
+        "key": "username",
+        "value": "{{basicAuthUsername}}",
+        "type": "string"
+      },
+      {
+        "key": "password",
+        "value": "{{basicAuthPassword}}",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://api.digio.in"
+    }
+  ]
+}
