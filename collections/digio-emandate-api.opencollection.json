@@ -1,0 +1,78 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Digio Documents eMandate API",
+    "version": "1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "basic",
+      "username": "{{username}}",
+      "password": "{{password}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "eMandate",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Create an eNACH / NACH mandate",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.digio.in/v3/client/mandate/create",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates an electronic mandate (eNACH via NPCI, UPI Autopay, or physical NACH) authorizing recurring debit from a customer bank account. Returns a mandate id prefixed with NACH/MANDATE."
+        },
+        {
+          "info": {
+            "name": "Get mandate details",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.digio.in/v3/client/mandate/:mandate_id",
+            "params": [
+              {
+                "name": "mandate_id",
+                "value": "",
+                "type": "path",
+                "description": "Mandate identifier."
+              }
+            ]
+          },
+          "docs": "Retrieves the status and details of an eNACH / NACH mandate."
+        },
+        {
+          "info": {
+            "name": "Cancel a mandate",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.digio.in/v3/client/mandate/:mandate_id/cancel",
+            "params": [
+              {
+                "name": "mandate_id",
+                "value": "",
+                "type": "path",
+                "description": "Mandate identifier."
+              }
+            ]
+          },
+          "docs": "Cancels an active eNACH / NACH mandate."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

@@ -1,0 +1,364 @@
+{
+  "item": [
+    {
+      "id": "c7fdc150-62a9-4189-b445-7aed104c54c7",
+      "name": "KYC",
+      "description": {
+        "content": "DigiKYC - identity verification via CKYC, KRA, DigiLocker, and offline Aadhaar.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "68ba6d2f-8824-4e6c-8241-98bb73bf32ed",
+          "name": "Create a KYC request with a template",
+          "request": {
+            "name": "Create a KYC request with a template",
+            "description": {
+              "content": "Initiates a KYC verification workflow using a pre-configured DigiKYC template (Aadhaar offline, DigiLocker, ID proof, CKYC, KRA, Video KYC). Returns a request id prefixed with KID.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "client",
+                "kyc",
+                "v2",
+                "request",
+                "with_template"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"customer_identifier\": \"<string>\",\n  \"template_name\": \"<string>\",\n  \"customer_name\": \"<string>\",\n  \"notify_customer\": \"<boolean>\",\n  \"generate_access_token\": \"<boolean>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "6d4f9c12-07c7-42a2-9827-a3cf0e5fe185",
+              "name": "KYC request created",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "client",
+                    "kyc",
+                    "v2",
+                    "request",
+                    "with_template"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"customer_identifier\": \"<string>\",\n  \"template_name\": \"<string>\",\n  \"customer_name\": \"<string>\",\n  \"notify_customer\": \"<boolean>\",\n  \"generate_access_token\": \"<boolean>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"string\",\n  \"status\": \"requested\",\n  \"customer_identifier\": \"string\",\n  \"actions\": [\n    {\n      \"type\": \"string\",\n      \"status\": \"string\",\n      \"details\": {\n        \"key_0\": false\n      }\n    },\n    {\n      \"type\": \"string\",\n      \"status\": \"string\",\n      \"details\": {\n        \"key_0\": \"string\"\n      }\n    }\n  ],\n  \"created_at\": \"2005-03-12T02:31:41.012Z\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "77a7aecc-16c8-49db-b130-6b5e39350950",
+              "name": "Missing or invalid Basic authentication credentials.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "client",
+                    "kyc",
+                    "v2",
+                    "request",
+                    "with_template"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"customer_identifier\": \"<string>\",\n  \"template_name\": \"<string>\",\n  \"customer_name\": \"<string>\",\n  \"notify_customer\": \"<boolean>\",\n  \"generate_access_token\": \"<boolean>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 9911,\n  \"message\": \"string\",\n  \"details\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "067cc65d-1424-436f-9df2-b46b76461387",
+          "name": "Get KYC request response",
+          "request": {
+            "name": "Get KYC request response",
+            "description": {
+              "content": "Fetches the collected identity data, extracted fields, and verification result for a completed KYC request.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "client",
+                "kyc",
+                "v2",
+                ":request_id",
+                "response"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "request_id",
+                  "description": "(Required) KYC request identifier (KID...)."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "398b4295-1acc-4e4a-824c-ac2e88973bb8",
+              "name": "KYC response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "client",
+                    "kyc",
+                    "v2",
+                    ":request_id",
+                    "response"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "request_id",
+                      "description": "(Required) KYC request identifier (KID...)."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"string\",\n  \"status\": \"requested\",\n  \"customer_identifier\": \"string\",\n  \"actions\": [\n    {\n      \"type\": \"string\",\n      \"status\": \"string\",\n      \"details\": {\n        \"key_0\": 5192.21578484355,\n        \"key_1\": 945.2297277057075\n      }\n    },\n    {\n      \"type\": \"string\",\n      \"status\": \"string\",\n      \"details\": {\n        \"key_0\": 3593,\n        \"key_1\": false,\n        \"key_2\": 3317.1591191001658\n      }\n    }\n  ],\n  \"created_at\": \"1984-03-29T15:51:40.102Z\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "9726ede0-181d-4cc9-8569-c29b7020213e",
+              "name": "Missing or invalid Basic authentication credentials.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "client",
+                    "kyc",
+                    "v2",
+                    ":request_id",
+                    "response"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "request_id",
+                      "description": "(Required) KYC request identifier (KID...)."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 9911,\n  \"message\": \"string\",\n  \"details\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.digio.in",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "basic",
+    "basic": [
+      {
+        "key": "username",
+        "value": "{{basicAuthUsername}}"
+      },
+      {
+        "key": "password",
+        "value": "{{basicAuthPassword}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "694a1309-bed6-4ad6-bd65-4a58f38b96a7",
+    "name": "Digio Documents KYC API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Digio is an India-based digital trust and paperwork automation platform offering legally-valid Aadhaar/OTP eSign, eStamping, KYC (CKYC, KRA, DigiLocker, offline Aadhaar, Video KYC), eNACH/NACH eMandates, UPI Autopay, AML/CFT screening, and document/agreement management over a REST API. All requests use HTTPS with HTTP Basic authentication (Base64 of client_id:client_secret). Asynchronous status updates are delivered via HTTP webhooks; there is no WebSocket surface.\n\nContact Support:\n Name: Digio Developer Support\n Email: tech@digio.in",
+      "type": "text/plain"
+    }
+  }
+}

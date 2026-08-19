@@ -1,0 +1,515 @@
+{
+  "item": [
+    {
+      "id": "3ddf4ca9-af4d-4ca5-b4cb-c297e74812be",
+      "name": "eMandate",
+      "description": {
+        "content": "DigiCollect - eNACH / NACH electronic mandates for recurring debit.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "56024669-c92d-425a-91b0-1e95b9b1a3a4",
+          "name": "Create an eNACH / NACH mandate",
+          "request": {
+            "name": "Create an eNACH / NACH mandate",
+            "description": {
+              "content": "Creates an electronic mandate (eNACH via NPCI, UPI Autopay, or physical NACH) authorizing recurring debit from a customer bank account. Returns a mandate id prefixed with NACH/MANDATE.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v3",
+                "client",
+                "mandate",
+                "create"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"customer_identifier\": \"<string>\",\n  \"maximum_amount\": \"<number>\",\n  \"auth_mode\": \"<string>\",\n  \"mandate_type\": \"<string>\",\n  \"first_collection_date\": \"<date>\",\n  \"final_collection_date\": \"<date>\",\n  \"frequency\": \"<string>\",\n  \"destination_bank_id\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "4a2cb955-1804-41ad-bde6-5739ae4be22b",
+              "name": "Mandate created",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v3",
+                    "client",
+                    "mandate",
+                    "create"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"customer_identifier\": \"<string>\",\n  \"maximum_amount\": \"<number>\",\n  \"auth_mode\": \"<string>\",\n  \"mandate_type\": \"<string>\",\n  \"first_collection_date\": \"<date>\",\n  \"final_collection_date\": \"<date>\",\n  \"frequency\": \"<string>\",\n  \"destination_bank_id\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"mandate_id\": \"string\",\n  \"state\": \"register_success\",\n  \"npci_txn_id\": \"string\",\n  \"umrn\": \"string\",\n  \"maximum_amount\": 4655.124230527057,\n  \"created_at\": \"1976-09-25T00:08:31.707Z\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "3d81c060-a25d-4e5d-aaec-08db47d443e9",
+              "name": "Missing or invalid Basic authentication credentials.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v3",
+                    "client",
+                    "mandate",
+                    "create"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"customer_identifier\": \"<string>\",\n  \"maximum_amount\": \"<number>\",\n  \"auth_mode\": \"<string>\",\n  \"mandate_type\": \"<string>\",\n  \"first_collection_date\": \"<date>\",\n  \"final_collection_date\": \"<date>\",\n  \"frequency\": \"<string>\",\n  \"destination_bank_id\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 4999,\n  \"message\": \"string\",\n  \"details\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "84e31147-b43d-44fc-979d-89e61f88acb3",
+          "name": "Get mandate details",
+          "request": {
+            "name": "Get mandate details",
+            "description": {
+              "content": "Retrieves the status and details of an eNACH / NACH mandate.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v3",
+                "client",
+                "mandate",
+                ":mandate_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "mandate_id",
+                  "description": "(Required) Mandate identifier."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "6dfa80c0-667b-496e-881e-c00b7cc8b0a8",
+              "name": "Mandate details",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v3",
+                    "client",
+                    "mandate",
+                    ":mandate_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "mandate_id",
+                      "description": "(Required) Mandate identifier."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"mandate_id\": \"string\",\n  \"state\": \"register_success\",\n  \"npci_txn_id\": \"string\",\n  \"umrn\": \"string\",\n  \"maximum_amount\": 4655.124230527057,\n  \"created_at\": \"1976-09-25T00:08:31.707Z\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "af15d484-f13b-41da-9c95-a5e1c3f116a0",
+              "name": "Missing or invalid Basic authentication credentials.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v3",
+                    "client",
+                    "mandate",
+                    ":mandate_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "mandate_id",
+                      "description": "(Required) Mandate identifier."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 4999,\n  \"message\": \"string\",\n  \"details\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "6464c47f-f4d3-49b5-9f9a-204b40b886c2",
+          "name": "Cancel a mandate",
+          "request": {
+            "name": "Cancel a mandate",
+            "description": {
+              "content": "Cancels an active eNACH / NACH mandate.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v3",
+                "client",
+                "mandate",
+                ":mandate_id",
+                "cancel"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "mandate_id",
+                  "description": "(Required) Mandate identifier."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "649a805c-d61d-4c79-9840-395712207022",
+              "name": "Mandate cancelled",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v3",
+                    "client",
+                    "mandate",
+                    ":mandate_id",
+                    "cancel"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "mandate_id",
+                      "description": "(Required) Mandate identifier."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"mandate_id\": \"string\",\n  \"state\": \"register_success\",\n  \"npci_txn_id\": \"string\",\n  \"umrn\": \"string\",\n  \"maximum_amount\": 4655.124230527057,\n  \"created_at\": \"1976-09-25T00:08:31.707Z\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "f08d8c0d-4c93-4f30-8575-029629426c2b",
+              "name": "Missing or invalid Basic authentication credentials.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v3",
+                    "client",
+                    "mandate",
+                    ":mandate_id",
+                    "cancel"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "mandate_id",
+                      "description": "(Required) Mandate identifier."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 4999,\n  \"message\": \"string\",\n  \"details\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.digio.in",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "basic",
+    "basic": [
+      {
+        "key": "username",
+        "value": "{{basicAuthUsername}}"
+      },
+      {
+        "key": "password",
+        "value": "{{basicAuthPassword}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "4c7ab096-eca0-476e-bd72-adc2e9369f79",
+    "name": "Digio Documents eMandate API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Digio is an India-based digital trust and paperwork automation platform offering legally-valid Aadhaar/OTP eSign, eStamping, KYC (CKYC, KRA, DigiLocker, offline Aadhaar, Video KYC), eNACH/NACH eMandates, UPI Autopay, AML/CFT screening, and document/agreement management over a REST API. All requests use HTTPS with HTTP Basic authentication (Base64 of client_id:client_secret). Asynchronous status updates are delivered via HTTP webhooks; there is no WebSocket surface.\n\nContact Support:\n Name: Digio Developer Support\n Email: tech@digio.in",
+      "type": "text/plain"
+    }
+  }
+}

@@ -1,0 +1,93 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Digio Documents eSign API",
+    "version": "1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "basic",
+      "username": "{{username}}",
+      "password": "{{password}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "eSign",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Upload a document and create an eSign request",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.digio.in/v2/client/document/upload",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Uploads a PDF file and creates a signature request for one or more signers (identified by a single email or phone number). Returns a document id prefixed with DID."
+        },
+        {
+          "info": {
+            "name": "Create an eSign request from a base64 PDF",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.digio.in/v2/client/document/uploadpdf",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a signature request from a base64-encoded PDF payload rather than a multipart file upload."
+        },
+        {
+          "info": {
+            "name": "Get eSign request details",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.digio.in/v2/client/document/:document_id",
+            "params": [
+              {
+                "name": "document_id",
+                "value": "",
+                "type": "path",
+                "description": "Signature request identifier (DID...)."
+              }
+            ]
+          },
+          "docs": "Retrieves the current status and signer details of a signature request."
+        },
+        {
+          "info": {
+            "name": "Download a signed document",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.digio.in/v2/client/document/download/:document_id",
+            "params": [
+              {
+                "name": "document_id",
+                "value": "",
+                "type": "path",
+                "description": "Signature request identifier (DID...)."
+              }
+            ]
+          },
+          "docs": "Downloads the completed, signed PDF for a signature request."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

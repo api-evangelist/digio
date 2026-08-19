@@ -1,0 +1,674 @@
+{
+  "item": [
+    {
+      "id": "72c0d626-b474-4ae3-9edd-6d8ae2d09a39",
+      "name": "eSign",
+      "description": {
+        "content": "DigiSign - Aadhaar and OTP based legally-valid electronic signatures.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "d410eead-89c2-44cd-84ec-724930343259",
+          "name": "Upload a document and create an eSign request",
+          "request": {
+            "name": "Upload a document and create an eSign request",
+            "description": {
+              "content": "Uploads a PDF file and creates a signature request for one or more signers (identified by a single email or phone number). Returns a document id prefixed with DID.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v2",
+                "client",
+                "document",
+                "upload"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"signers\": [\n    {\n      \"identifier\": \"<string>\",\n      \"name\": \"<string>\",\n      \"reason\": \"<string>\",\n      \"sign_type\": \"<string>\"\n    },\n    {\n      \"identifier\": \"<string>\",\n      \"name\": \"<string>\",\n      \"reason\": \"<string>\",\n      \"sign_type\": \"<string>\"\n    }\n  ],\n  \"file_name\": \"<string>\",\n  \"expire_in_days\": \"<integer>\",\n  \"display_on_page\": \"<string>\",\n  \"notify_signers\": \"<boolean>\",\n  \"send_sign_link\": \"<boolean>\",\n  \"file_data\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "7c738295-2956-4564-a1e5-685e2adc410a",
+              "name": "Sign request created",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "client",
+                    "document",
+                    "upload"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"signers\": [\n    {\n      \"identifier\": \"<string>\",\n      \"name\": \"<string>\",\n      \"reason\": \"<string>\",\n      \"sign_type\": \"<string>\"\n    },\n    {\n      \"identifier\": \"<string>\",\n      \"name\": \"<string>\",\n      \"reason\": \"<string>\",\n      \"sign_type\": \"<string>\"\n    }\n  ],\n  \"file_name\": \"<string>\",\n  \"expire_in_days\": \"<integer>\",\n  \"display_on_page\": \"<string>\",\n  \"notify_signers\": \"<boolean>\",\n  \"send_sign_link\": \"<boolean>\",\n  \"file_data\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"string\",\n  \"is_agreement\": false,\n  \"agreement_type\": \"string\",\n  \"signing_parties\": [\n    {\n      \"name\": \"string\",\n      \"identifier\": \"string\",\n      \"status\": \"requested\"\n    },\n    {\n      \"name\": \"string\",\n      \"identifier\": \"string\",\n      \"status\": \"requested\"\n    }\n  ],\n  \"file_name\": \"string\",\n  \"created_at\": \"1983-11-16T14:21:58.685Z\",\n  \"agreement_status\": \"requested\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "8a0026d0-9f10-4711-8898-73e174dff0dd",
+              "name": "Missing or invalid Basic authentication credentials.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "client",
+                    "document",
+                    "upload"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"signers\": [\n    {\n      \"identifier\": \"<string>\",\n      \"name\": \"<string>\",\n      \"reason\": \"<string>\",\n      \"sign_type\": \"<string>\"\n    },\n    {\n      \"identifier\": \"<string>\",\n      \"name\": \"<string>\",\n      \"reason\": \"<string>\",\n      \"sign_type\": \"<string>\"\n    }\n  ],\n  \"file_name\": \"<string>\",\n  \"expire_in_days\": \"<integer>\",\n  \"display_on_page\": \"<string>\",\n  \"notify_signers\": \"<boolean>\",\n  \"send_sign_link\": \"<boolean>\",\n  \"file_data\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 7125,\n  \"message\": \"string\",\n  \"details\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "5e01d510-3bd6-4b64-8c14-09d2db27bd86",
+          "name": "Create an eSign request from a base64 PDF",
+          "request": {
+            "name": "Create an eSign request from a base64 PDF",
+            "description": {
+              "content": "Creates a signature request from a base64-encoded PDF payload rather than a multipart file upload.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v2",
+                "client",
+                "document",
+                "uploadpdf"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"signers\": [\n    {\n      \"identifier\": \"<string>\",\n      \"name\": \"<string>\",\n      \"reason\": \"<string>\",\n      \"sign_type\": \"<string>\"\n    },\n    {\n      \"identifier\": \"<string>\",\n      \"name\": \"<string>\",\n      \"reason\": \"<string>\",\n      \"sign_type\": \"<string>\"\n    }\n  ],\n  \"file_name\": \"<string>\",\n  \"expire_in_days\": \"<integer>\",\n  \"display_on_page\": \"<string>\",\n  \"notify_signers\": \"<boolean>\",\n  \"send_sign_link\": \"<boolean>\",\n  \"file_data\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "e48fa17e-46fb-4510-ac4d-820d429fb59a",
+              "name": "Sign request created",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "client",
+                    "document",
+                    "uploadpdf"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"signers\": [\n    {\n      \"identifier\": \"<string>\",\n      \"name\": \"<string>\",\n      \"reason\": \"<string>\",\n      \"sign_type\": \"<string>\"\n    },\n    {\n      \"identifier\": \"<string>\",\n      \"name\": \"<string>\",\n      \"reason\": \"<string>\",\n      \"sign_type\": \"<string>\"\n    }\n  ],\n  \"file_name\": \"<string>\",\n  \"expire_in_days\": \"<integer>\",\n  \"display_on_page\": \"<string>\",\n  \"notify_signers\": \"<boolean>\",\n  \"send_sign_link\": \"<boolean>\",\n  \"file_data\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"string\",\n  \"is_agreement\": true,\n  \"agreement_type\": \"string\",\n  \"signing_parties\": [\n    {\n      \"name\": \"string\",\n      \"identifier\": \"string\",\n      \"status\": \"signed\"\n    },\n    {\n      \"name\": \"string\",\n      \"identifier\": \"string\",\n      \"status\": \"requested\"\n    }\n  ],\n  \"file_name\": \"string\",\n  \"created_at\": \"2018-05-18T11:29:22.271Z\",\n  \"agreement_status\": \"expired\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "b5a2ea1d-5d11-42e5-b733-18b6963ee340",
+              "name": "Missing or invalid Basic authentication credentials.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "client",
+                    "document",
+                    "uploadpdf"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"signers\": [\n    {\n      \"identifier\": \"<string>\",\n      \"name\": \"<string>\",\n      \"reason\": \"<string>\",\n      \"sign_type\": \"<string>\"\n    },\n    {\n      \"identifier\": \"<string>\",\n      \"name\": \"<string>\",\n      \"reason\": \"<string>\",\n      \"sign_type\": \"<string>\"\n    }\n  ],\n  \"file_name\": \"<string>\",\n  \"expire_in_days\": \"<integer>\",\n  \"display_on_page\": \"<string>\",\n  \"notify_signers\": \"<boolean>\",\n  \"send_sign_link\": \"<boolean>\",\n  \"file_data\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 7125,\n  \"message\": \"string\",\n  \"details\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "802e5793-f872-41ae-8bfc-cedf77e75d2f",
+          "name": "Get eSign request details",
+          "request": {
+            "name": "Get eSign request details",
+            "description": {
+              "content": "Retrieves the current status and signer details of a signature request.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v2",
+                "client",
+                "document",
+                ":document_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "document_id",
+                  "description": "(Required) Signature request identifier (DID...)."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "53d47bbe-e49c-4d9c-bec2-43136e6e3026",
+              "name": "Document details",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "client",
+                    "document",
+                    ":document_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "document_id",
+                      "description": "(Required) Signature request identifier (DID...)."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"string\",\n  \"is_agreement\": true,\n  \"agreement_type\": \"string\",\n  \"signing_parties\": [\n    {\n      \"name\": \"string\",\n      \"identifier\": \"string\",\n      \"status\": \"signed\"\n    },\n    {\n      \"name\": \"string\",\n      \"identifier\": \"string\",\n      \"status\": \"requested\"\n    }\n  ],\n  \"file_name\": \"string\",\n  \"created_at\": \"2018-05-18T11:29:22.271Z\",\n  \"agreement_status\": \"expired\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "ba401536-6c47-4f48-9e9e-278dbb3714fb",
+              "name": "Missing or invalid Basic authentication credentials.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "client",
+                    "document",
+                    ":document_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "document_id",
+                      "description": "(Required) Signature request identifier (DID...)."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 7125,\n  \"message\": \"string\",\n  \"details\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "ea88e617-b518-4aa0-b852-8c42be405b0f",
+          "name": "Download a signed document",
+          "request": {
+            "name": "Download a signed document",
+            "description": {
+              "content": "Downloads the completed, signed PDF for a signature request.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v2",
+                "client",
+                "document",
+                "download",
+                ":document_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "document_id",
+                  "description": "(Required) Signature request identifier (DID...)."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/pdf"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "62e06c6f-c8f9-4086-9ea1-d560c4d8f2ac",
+              "name": "Signed PDF",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "client",
+                    "document",
+                    "download",
+                    ":document_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "document_id",
+                      "description": "(Required) Signature request identifier (DID...)."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/pdf"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/pdf"
+                }
+              ],
+              "body": "string",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "eb22db71-6601-4d8d-a451-fddd64a90536",
+              "name": "Missing or invalid Basic authentication credentials.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "client",
+                    "document",
+                    "download",
+                    ":document_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "document_id",
+                      "description": "(Required) Signature request identifier (DID...)."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 7125,\n  \"message\": \"string\",\n  \"details\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.digio.in",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "basic",
+    "basic": [
+      {
+        "key": "username",
+        "value": "{{basicAuthUsername}}"
+      },
+      {
+        "key": "password",
+        "value": "{{basicAuthPassword}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "1da0fca1-0797-4054-aafc-cd4eee8b1504",
+    "name": "Digio Documents eSign API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Digio is an India-based digital trust and paperwork automation platform offering legally-valid Aadhaar/OTP eSign, eStamping, KYC (CKYC, KRA, DigiLocker, offline Aadhaar, Video KYC), eNACH/NACH eMandates, UPI Autopay, AML/CFT screening, and document/agreement management over a REST API. All requests use HTTPS with HTTP Basic authentication (Base64 of client_id:client_secret). Asynchronous status updates are delivered via HTTP webhooks; there is no WebSocket surface.\n\nContact Support:\n Name: Digio Developer Support\n Email: tech@digio.in",
+      "type": "text/plain"
+    }
+  }
+}

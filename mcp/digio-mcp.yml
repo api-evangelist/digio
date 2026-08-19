@@ -2,43 +2,47 @@ generated: '2026-07-17'
 method: derived
 status: candidate
 source: openapi/digio-openapi.yml
-notes: >-
-  No official hosted/remote Digio MCP server was found (no @modelcontextprotocol
-  package, no registry entry, no docs mention as of 2026-07-17). This is a CANDIDATE
-  tool surface DERIVED one-tool-per-operation from the modeled OpenAPI. Digio uses
-  HTTP Basic auth; write operations act on legally-binding artifacts (signatures,
-  mandates, KYC) and should be gated with human-in-the-loop per agentic-access/.
+notes: No official hosted/remote Digio MCP server was found (no @modelcontextprotocol package, no registry
+  entry, no docs mention as of 2026-07-17). This is a CANDIDATE tool surface DERIVED one-tool-per-operation
+  from the modeled OpenAPI. Digio uses HTTP Basic auth; write operations act on legally-binding artifacts
+  (signatures, mandates, KYC) and should be gated with human-in-the-loop per agentic-access/.
 server:
   name: digio
   transport: http
 tools:
-  - name: upload_document_for_sign
-    description: Upload a PDF and create an eSign request for one or more signers.
-    source_operation: openapi/digio-openapi.yml#uploadDocumentForSign
-  - name: upload_pdf_for_sign
-    description: Create an eSign request from a base64-encoded PDF.
-    source_operation: openapi/digio-openapi.yml#uploadPdfForSign
-  - name: get_document
-    description: Get the status and signer details of an eSign request.
-    source_operation: openapi/digio-openapi.yml#getDocument
-  - name: download_signed_document
-    description: Download the completed, signed PDF.
-    source_operation: openapi/digio-openapi.yml#downloadSignedDocument
-  - name: create_sign_request_from_template
-    description: Generate a document from a DigiDocs template and create an eSign request.
-    source_operation: openapi/digio-openapi.yml#createSignRequestFromTemplate
-  - name: create_mandate
-    description: Create an eNACH / NACH / UPI Autopay recurring-debit mandate.
-    source_operation: openapi/digio-openapi.yml#createMandate
-  - name: get_mandate
-    description: Get the status and details of an eNACH / NACH mandate.
-    source_operation: openapi/digio-openapi.yml#getMandate
-  - name: cancel_mandate
-    description: Cancel an active eNACH / NACH mandate.
-    source_operation: openapi/digio-openapi.yml#cancelMandate
-  - name: create_kyc_request
-    description: Start a DigiKYC verification workflow from a template.
-    source_operation: openapi/digio-openapi.yml#createKycRequest
-  - name: get_kyc_response
-    description: Fetch the collected identity data and verification result for a KYC request.
-    source_operation: openapi/digio-openapi.yml#getKycResponse
+- name: upload_document_for_sign
+  description: Upload a PDF and create an eSign request for one or more signers.
+  source_operation: openapi/digio-openapi.yml#uploadDocumentForSign
+- name: upload_pdf_for_sign
+  description: Create an eSign request from a base64-encoded PDF.
+  source_operation: openapi/digio-openapi.yml#uploadPdfForSign
+- name: get_document
+  description: Get the status and signer details of an eSign request.
+  source_operation: openapi/digio-openapi.yml#getDocument
+- name: download_signed_document
+  description: Download the completed, signed PDF.
+  source_operation: openapi/digio-openapi.yml#downloadSignedDocument
+- name: create_sign_request_from_template
+  description: Generate a document from a DigiDocs template and create an eSign request.
+  source_operation: openapi/digio-openapi.yml#createSignRequestFromTemplate
+- name: create_mandate
+  description: Create an eNACH / NACH / UPI Autopay recurring-debit mandate.
+  source_operation: openapi/digio-openapi.yml#createMandate
+- name: get_mandate
+  description: Get the status and details of an eNACH / NACH mandate.
+  source_operation: openapi/digio-openapi.yml#getMandate
+- name: cancel_mandate
+  description: Cancel an active eNACH / NACH mandate.
+  source_operation: openapi/digio-openapi.yml#cancelMandate
+- name: create_kyc_request
+  description: Start a DigiKYC verification workflow from a template.
+  source_operation: openapi/digio-openapi.yml#createKycRequest
+- name: get_kyc_response
+  description: Fetch the collected identity data and verification result for a KYC request.
+  source_operation: openapi/digio-openapi.yml#getKycResponse
+deployment:
+  mode: none
+  verified: derived
+  tools: 10
+  checked: '2026-08-12'
+  source: catalog MCP census

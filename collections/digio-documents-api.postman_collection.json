@@ -1,0 +1,207 @@
+{
+  "item": [
+    {
+      "id": "bffb3a5a-8da7-4c6b-aa77-f65f0edb38f3",
+      "name": "Documents",
+      "description": {
+        "content": "DigiDocs - template-based document and agreement creation with eStamp.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "52862169-468a-4ba6-9278-d65300327738",
+          "name": "Create a sign request from a template",
+          "request": {
+            "name": "Create a sign request from a template",
+            "description": {
+              "content": "Generates a document from a pre-configured DigiDocs template (with optional eStamp) and creates an eSign request in one call.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v2",
+                "client",
+                "template",
+                "multi_templates",
+                "create_sign_request"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"template_id\": \"<string>\",\n  \"signers\": [\n    {\n      \"identifier\": \"<string>\",\n      \"name\": \"<string>\",\n      \"reason\": \"<string>\",\n      \"sign_type\": \"<string>\"\n    },\n    {\n      \"identifier\": \"<string>\",\n      \"name\": \"<string>\",\n      \"reason\": \"<string>\",\n      \"sign_type\": \"<string>\"\n    }\n  ],\n  \"template_values\": {\n    \"key_0\": 5745.293225686998,\n    \"key_1\": 7840,\n    \"key_2\": \"string\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "0d20cf29-edc9-414d-92e5-a7e6547007b8",
+              "name": "Sign request created from template",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "client",
+                    "template",
+                    "multi_templates",
+                    "create_sign_request"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"template_id\": \"<string>\",\n  \"signers\": [\n    {\n      \"identifier\": \"<string>\",\n      \"name\": \"<string>\",\n      \"reason\": \"<string>\",\n      \"sign_type\": \"<string>\"\n    },\n    {\n      \"identifier\": \"<string>\",\n      \"name\": \"<string>\",\n      \"reason\": \"<string>\",\n      \"sign_type\": \"<string>\"\n    }\n  ],\n  \"template_values\": {\n    \"key_0\": false,\n    \"key_1\": false\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"string\",\n  \"is_agreement\": false,\n  \"agreement_type\": \"string\",\n  \"signing_parties\": [\n    {\n      \"name\": \"string\",\n      \"identifier\": \"string\",\n      \"status\": \"signed\"\n    },\n    {\n      \"name\": \"string\",\n      \"identifier\": \"string\",\n      \"status\": \"expired\"\n    }\n  ],\n  \"file_name\": \"string\",\n  \"created_at\": \"1990-02-03T18:10:09.976Z\",\n  \"agreement_status\": \"expired\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "9e9d0f02-5940-49ae-a4f1-acc4259a2cfc",
+              "name": "Missing or invalid Basic authentication credentials.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "client",
+                    "template",
+                    "multi_templates",
+                    "create_sign_request"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"template_id\": \"<string>\",\n  \"signers\": [\n    {\n      \"identifier\": \"<string>\",\n      \"name\": \"<string>\",\n      \"reason\": \"<string>\",\n      \"sign_type\": \"<string>\"\n    },\n    {\n      \"identifier\": \"<string>\",\n      \"name\": \"<string>\",\n      \"reason\": \"<string>\",\n      \"sign_type\": \"<string>\"\n    }\n  ],\n  \"template_values\": {\n    \"key_0\": false,\n    \"key_1\": false\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 9461,\n  \"message\": \"string\",\n  \"details\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.digio.in",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "basic",
+    "basic": [
+      {
+        "key": "username",
+        "value": "{{basicAuthUsername}}"
+      },
+      {
+        "key": "password",
+        "value": "{{basicAuthPassword}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "c62a5a27-4643-44b1-b156-a81016847c08",
+    "name": "Digio Documents API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Digio is an India-based digital trust and paperwork automation platform offering legally-valid Aadhaar/OTP eSign, eStamping, KYC (CKYC, KRA, DigiLocker, offline Aadhaar, Video KYC), eNACH/NACH eMandates, UPI Autopay, AML/CFT screening, and document/agreement management over a REST API. All requests use HTTPS with HTTP Basic authentication (Base64 of client_id:client_secret). Asynchronous status updates are delivered via HTTP webhooks; there is no WebSocket surface.\n\nContact Support:\n Name: Digio Developer Support\n Email: tech@digio.in",
+      "type": "text/plain"
+    }
+  }
+}

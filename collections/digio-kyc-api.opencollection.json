@@ -1,0 +1,59 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Digio Documents KYC API",
+    "version": "1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "basic",
+      "username": "{{username}}",
+      "password": "{{password}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "KYC",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Create a KYC request with a template",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.digio.in/client/kyc/v2/request/with_template",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Initiates a KYC verification workflow using a pre-configured DigiKYC template (Aadhaar offline, DigiLocker, ID proof, CKYC, KRA, Video KYC). Returns a request id prefixed with KID."
+        },
+        {
+          "info": {
+            "name": "Get KYC request response",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.digio.in/client/kyc/v2/:request_id/response",
+            "params": [
+              {
+                "name": "request_id",
+                "value": "",
+                "type": "path",
+                "description": "KYC request identifier (KID...)."
+              }
+            ]
+          },
+          "docs": "Fetches the collected identity data, extracted fields, and verification result for a completed KYC request."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}
