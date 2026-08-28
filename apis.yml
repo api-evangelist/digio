@@ -7,6 +7,18 @@ description: Digio is an India-based digital trust and paperwork automation plat
   KRA, DigiLocker, offline Aadhaar, and Video KYC), eNACH/NACH eMandates and UPI
   Autopay recurring payments, AML/CFT screening, and template-based document and
   agreement management. All endpoints use HTTPS with HTTP Basic authentication.
+deliveryModel:
+  model: saas
+  open_source: false
+  commercial: true
+  callable_host: true
+  label: Hosted service · you call their endpoint
+  confidence: high
+  source:
+  - openapi
+  - pricing
+  generated: '2026-08-28'
+  method: derived
 accessModel:
   pricing: paid
   onboarding: self-serve
