@@ -133,16 +133,16 @@ apis:
   - type: APIReference
     url: >-
       https://documentation.digio.in/digidocs/api_integration/create_document_from_template_api/
-- aid: digio:digio-esign-api
-  name: Digio eSign API
-  description: DigiSign - Aadhaar and OTP based legally-valid electronic signatures.
+- aid: digio:digio-kyc-api
+  name: Digio KYC API
+  description: DigiKYC - identity verification via CKYC, KRA, DigiLocker, and offline Aadhaar.
   humanURL: https://documentation.digio.in/digisign/
   baseURL: https://api.digio.in
   tags:
-  - eSign
+  - KYC
   properties:
   - type: OpenAPI
-    url: openapi/digio-esign-api-openapi.yml
+    url: openapi/digio-kyc-api-openapi.yml
   - type: Documentation
     url: https://documentation.digio.in/digisign/
   - type: APIReference
@@ -160,16 +160,16 @@ apis:
   - type: APIReference
     url: >-
       https://documentation.digio.in/digidocs/api_integration/create_document_from_template_api/
-- aid: digio:digio-kyc-api
-  name: Digio KYC API
-  description: DigiKYC - identity verification via CKYC, KRA, DigiLocker, and offline Aadhaar.
-  humanURL: https://documentation.digio.in/digisign/
+- aid: digio:digio-e-sign-api
+  name: Digio e Sign API
+  description: DigiSign - Aadhaar and OTP based legally-valid electronic signatures.
+  humanURL: https://documentation.digio.in/digikyc/digilocker/
   baseURL: https://api.digio.in
   tags:
-  - KYC
+  - e Sign
   properties:
   - type: OpenAPI
-    url: openapi/digio-kyc-api-openapi.yml
+    url: openapi/digio-e-sign-api-openapi.yml
   - type: Documentation
     url: https://documentation.digio.in/digisign/
   - type: APIReference
