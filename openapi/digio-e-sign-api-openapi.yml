@@ -1,6 +1,6 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
-  title: Digio Documents eSign API
+  title: Digio E Sign API
   description: Digio is an India-based digital trust and paperwork automation platform offering legally-valid Aadhaar/OTP eSign, eStamping, KYC (CKYC, KRA, DigiLocker, offline Aadhaar, Video KYC), eNACH/NACH eMandates, UPI Autopay, AML/CFT screening, and document/agreement management over a REST API. All requests use HTTPS with HTTP Basic authentication (Base64 of client_id:client_secret). Asynchronous status updates are delivered via HTTP webhooks; there is no WebSocket surface.
   version: '1.0'
   contact:
@@ -16,14 +16,14 @@ servers:
 security:
 - basicAuth: []
 tags:
-- name: eSign
+- name: e Sign
   description: DigiSign - Aadhaar and OTP based legally-valid electronic signatures.
 paths:
   /v2/client/document/upload:
     post:
       operationId: uploadDocumentForSign
       tags:
-      - eSign
+      - e Sign
       summary: Upload a document and create an eSign request
       description: Uploads a PDF file and creates a signature request for one or more signers (identified by a single email or phone number). Returns a document id prefixed with DID.
       requestBody:
@@ -45,7 +45,7 @@ paths:
     post:
       operationId: uploadPdfForSign
       tags:
-      - eSign
+      - e Sign
       summary: Create an eSign request from a base64 PDF
       description: Creates a signature request from a base64-encoded PDF payload rather than a multipart file upload.
       requestBody:
@@ -67,7 +67,7 @@ paths:
     get:
       operationId: getDocument
       tags:
-      - eSign
+      - e Sign
       summary: Get eSign request details
       description: Retrieves the current status and signer details of a signature request.
       parameters:
@@ -85,7 +85,7 @@ paths:
     get:
       operationId: downloadSignedDocument
       tags:
-      - eSign
+      - e Sign
       summary: Download a signed document
       description: Downloads the completed, signed PDF for a signature request.
       parameters:
@@ -101,24 +101,58 @@ paths:
         '401':
           $ref: '#/components/responses/Unauthorized'
 components:
-  parameters:
-    DocumentId:
-      name: document_id
-      in: path
-      required: true
-      description: Signature request identifier (DID...).
-      schema:
-        type: string
   schemas:
-    Error:
+    UploadDocumentRequest:
       type: object
       properties:
-        code:
+        signers:
+          type: array
+          items:
+            $ref: '#/components/schemas/Signer'
+        expire_in_days:
           type: integer
-        message:
+        display_on_page:
           type: string
-        details:
+          enum:
+          - first
+          - last
+          - all
+          - custom
+        notify_signers:
+          type: boolean
+        send_sign_link:
+          type: boolean
+        file_name:
           type: string
+        file_data:
+          type: string
+          description: Base64-encoded PDF content.
+      required:
+      - signers
+      - file_name
+    Signer:
+      type: object
+      properties:
+        identifier:
+          type: string
+          description: A single signer identifier - either an email address or a phone number.
+        name:
+          type: string
+        reason:
+          type: string
+          description: Reason for signing.
+        sign_type:
+          type: string
+          description: Signature type.
+          enum:
+          - aadhaar
+          - electronic
+          - dsc
+      required:
+      - identifier
+    UploadPdfRequest:
+      allOf:
+      - $ref: '#/components/schemas/UploadDocumentRequest'
     SignDocument:
       type: object
       properties:
@@ -155,57 +189,23 @@ components:
           - requested
           - completed
           - expired
-    UploadDocumentRequest:
+    Error:
       type: object
       properties:
-        signers:
-          type: array
-          items:
-            $ref: '#/components/schemas/Signer'
-        expire_in_days:
+        code:
           type: integer
-        display_on_page:
+        message:
           type: string
-          enum:
-          - first
-          - last
-          - all
-          - custom
-        notify_signers:
-          type: boolean
-        send_sign_link:
-          type: boolean
-        file_name:
+        details:
           type: string
-        file_data:
-          type: string
-          description: Base64-encoded PDF content.
-      required:
-      - signers
-      - file_name
-    UploadPdfRequest:
-      allOf:
-      - $ref: '#/components/schemas/UploadDocumentRequest'
-    Signer:
-      type: object
-      properties:
-        identifier:
-          type: string
-          description: A single signer identifier - either an email address or a phone number.
-        name:
-          type: string
-        reason:
-          type: string
-          description: Reason for signing.
-        sign_type:
-          type: string
-          description: Signature type.
-          enum:
-          - aadhaar
-          - electronic
-          - dsc
-      required:
-      - identifier
+  parameters:
+    DocumentId:
+      name: document_id
+      in: path
+      required: true
+      description: Signature request identifier (DID...).
+      schema:
+        type: string
   responses:
     Unauthorized:
       description: Missing or invalid Basic authentication credentials.

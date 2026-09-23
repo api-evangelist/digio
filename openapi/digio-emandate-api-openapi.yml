@@ -1,6 +1,6 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
-  title: Digio Documents eMandate API
+  title: Digio E Mandate API
   description: Digio is an India-based digital trust and paperwork automation platform offering legally-valid Aadhaar/OTP eSign, eStamping, KYC (CKYC, KRA, DigiLocker, offline Aadhaar, Video KYC), eNACH/NACH eMandates, UPI Autopay, AML/CFT screening, and document/agreement management over a REST API. All requests use HTTPS with HTTP Basic authentication (Base64 of client_id:client_secret). Asynchronous status updates are delivered via HTTP webhooks; there is no WebSocket surface.
   version: '1.0'
   contact:
@@ -78,16 +78,15 @@ paths:
         '401':
           $ref: '#/components/responses/Unauthorized'
 components:
+  parameters:
+    MandateId:
+      name: mandate_id
+      in: path
+      required: true
+      description: Mandate identifier.
+      schema:
+        type: string
   schemas:
-    Error:
-      type: object
-      properties:
-        code:
-          type: integer
-        message:
-          type: string
-        details:
-          type: string
     Mandate:
       type: object
       properties:
@@ -150,6 +149,15 @@ components:
       required:
       - customer_identifier
       - maximum_amount
+    Error:
+      type: object
+      properties:
+        code:
+          type: integer
+        message:
+          type: string
+        details:
+          type: string
   responses:
     Unauthorized:
       description: Missing or invalid Basic authentication credentials.
@@ -157,14 +165,6 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/Error'
-  parameters:
-    MandateId:
-      name: mandate_id
-      in: path
-      required: true
-      description: Mandate identifier.
-      schema:
-        type: string
   securitySchemes:
     basicAuth:
       type: http

@@ -1,4 +1,4 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
   title: Digio Documents API
   description: Digio is an India-based digital trust and paperwork automation platform offering legally-valid Aadhaar/OTP eSign, eStamping, KYC (CKYC, KRA, DigiLocker, offline Aadhaar, Video KYC), eNACH/NACH eMandates, UPI Autopay, AML/CFT screening, and document/agreement management over a REST API. All requests use HTTPS with HTTP Basic authentication (Base64 of client_id:client_secret). Asynchronous status updates are delivered via HTTP webhooks; there is no WebSocket surface.
@@ -43,6 +43,26 @@ paths:
           $ref: '#/components/responses/Unauthorized'
 components:
   schemas:
+    Signer:
+      type: object
+      properties:
+        identifier:
+          type: string
+          description: A single signer identifier - either an email address or a phone number.
+        name:
+          type: string
+        reason:
+          type: string
+          description: Reason for signing.
+        sign_type:
+          type: string
+          description: Signature type.
+          enum:
+          - aadhaar
+          - electronic
+          - dsc
+      required:
+      - identifier
     TemplateSignRequest:
       type: object
       properties:
@@ -58,15 +78,6 @@ components:
       required:
       - template_id
       - signers
-    Error:
-      type: object
-      properties:
-        code:
-          type: integer
-        message:
-          type: string
-        details:
-          type: string
     SignDocument:
       type: object
       properties:
@@ -103,26 +114,15 @@ components:
           - requested
           - completed
           - expired
-    Signer:
+    Error:
       type: object
       properties:
-        identifier:
+        code:
+          type: integer
+        message:
           type: string
-          description: A single signer identifier - either an email address or a phone number.
-        name:
+        details:
           type: string
-        reason:
-          type: string
-          description: Reason for signing.
-        sign_type:
-          type: string
-          description: Signature type.
-          enum:
-          - aadhaar
-          - electronic
-          - dsc
-      required:
-      - identifier
   responses:
     Unauthorized:
       description: Missing or invalid Basic authentication credentials.
