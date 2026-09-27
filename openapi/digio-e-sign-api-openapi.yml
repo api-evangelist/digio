@@ -1,6 +1,6 @@
 openapi: 3.2.0
 info:
-  title: Digio E Sign API
+  title: Digio eSign API
   description: Digio is an India-based digital trust and paperwork automation platform offering legally-valid Aadhaar/OTP eSign, eStamping, KYC (CKYC, KRA, DigiLocker, offline Aadhaar, Video KYC), eNACH/NACH eMandates, UPI Autopay, AML/CFT screening, and document/agreement management over a REST API. All requests use HTTPS with HTTP Basic authentication (Base64 of client_id:client_secret). Asynchronous status updates are delivered via HTTP webhooks; there is no WebSocket surface.
   version: '1.0'
   contact:
@@ -101,7 +101,31 @@ paths:
         '401':
           $ref: '#/components/responses/Unauthorized'
 components:
+  responses:
+    Unauthorized:
+      description: Missing or invalid Basic authentication credentials.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+  parameters:
+    DocumentId:
+      name: document_id
+      in: path
+      required: true
+      description: Signature request identifier (DID...).
+      schema:
+        type: string
   schemas:
+    Error:
+      type: object
+      properties:
+        code:
+          type: integer
+        message:
+          type: string
+        details:
+          type: string
     UploadDocumentRequest:
       type: object
       properties:
@@ -130,29 +154,6 @@ components:
       required:
       - signers
       - file_name
-    Signer:
-      type: object
-      properties:
-        identifier:
-          type: string
-          description: A single signer identifier - either an email address or a phone number.
-        name:
-          type: string
-        reason:
-          type: string
-          description: Reason for signing.
-        sign_type:
-          type: string
-          description: Signature type.
-          enum:
-          - aadhaar
-          - electronic
-          - dsc
-      required:
-      - identifier
-    UploadPdfRequest:
-      allOf:
-      - $ref: '#/components/schemas/UploadDocumentRequest'
     SignDocument:
       type: object
       properties:
@@ -189,30 +190,29 @@ components:
           - requested
           - completed
           - expired
-    Error:
+    Signer:
       type: object
       properties:
-        code:
-          type: integer
-        message:
+        identifier:
           type: string
-        details:
+          description: A single signer identifier - either an email address or a phone number.
+        name:
           type: string
-  parameters:
-    DocumentId:
-      name: document_id
-      in: path
-      required: true
-      description: Signature request identifier (DID...).
-      schema:
-        type: string
-  responses:
-    Unauthorized:
-      description: Missing or invalid Basic authentication credentials.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
+        reason:
+          type: string
+          description: Reason for signing.
+        sign_type:
+          type: string
+          description: Signature type.
+          enum:
+          - aadhaar
+          - electronic
+          - dsc
+      required:
+      - identifier
+    UploadPdfRequest:
+      allOf:
+      - $ref: '#/components/schemas/UploadDocumentRequest'
   securitySchemes:
     basicAuth:
       type: http

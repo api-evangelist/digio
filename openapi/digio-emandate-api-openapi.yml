@@ -78,15 +78,23 @@ paths:
         '401':
           $ref: '#/components/responses/Unauthorized'
 components:
-  parameters:
-    MandateId:
-      name: mandate_id
-      in: path
-      required: true
-      description: Mandate identifier.
-      schema:
-        type: string
+  responses:
+    Unauthorized:
+      description: Missing or invalid Basic authentication credentials.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
   schemas:
+    Error:
+      type: object
+      properties:
+        code:
+          type: integer
+        message:
+          type: string
+        details:
+          type: string
     Mandate:
       type: object
       properties:
@@ -149,22 +157,14 @@ components:
       required:
       - customer_identifier
       - maximum_amount
-    Error:
-      type: object
-      properties:
-        code:
-          type: integer
-        message:
-          type: string
-        details:
-          type: string
-  responses:
-    Unauthorized:
-      description: Missing or invalid Basic authentication credentials.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
+  parameters:
+    MandateId:
+      name: mandate_id
+      in: path
+      required: true
+      description: Mandate identifier.
+      schema:
+        type: string
   securitySchemes:
     basicAuth:
       type: http

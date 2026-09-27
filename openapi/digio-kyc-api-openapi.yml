@@ -82,6 +82,24 @@ components:
           type: string
         details:
           type: string
+    KycRequest:
+      type: object
+      properties:
+        customer_identifier:
+          type: string
+          description: Customer email or phone number.
+        customer_name:
+          type: string
+        template_name:
+          type: string
+          description: DigiKYC workflow template name.
+        notify_customer:
+          type: boolean
+        generate_access_token:
+          type: boolean
+      required:
+      - customer_identifier
+      - template_name
     KycResponse:
       type: object
       properties:
@@ -112,24 +130,6 @@ components:
         created_at:
           type: string
           format: date-time
-    KycRequest:
-      type: object
-      properties:
-        customer_identifier:
-          type: string
-          description: Customer email or phone number.
-        customer_name:
-          type: string
-        template_name:
-          type: string
-          description: DigiKYC workflow template name.
-        notify_customer:
-          type: boolean
-        generate_access_token:
-          type: boolean
-      required:
-      - customer_identifier
-      - template_name
   securitySchemes:
     basicAuth:
       type: http

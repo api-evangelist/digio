@@ -42,42 +42,23 @@ paths:
         '401':
           $ref: '#/components/responses/Unauthorized'
 components:
+  responses:
+    Unauthorized:
+      description: Missing or invalid Basic authentication credentials.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
   schemas:
-    Signer:
+    Error:
       type: object
       properties:
-        identifier:
+        code:
+          type: integer
+        message:
           type: string
-          description: A single signer identifier - either an email address or a phone number.
-        name:
+        details:
           type: string
-        reason:
-          type: string
-          description: Reason for signing.
-        sign_type:
-          type: string
-          description: Signature type.
-          enum:
-          - aadhaar
-          - electronic
-          - dsc
-      required:
-      - identifier
-    TemplateSignRequest:
-      type: object
-      properties:
-        template_values:
-          type: object
-          additionalProperties: true
-        template_id:
-          type: string
-        signers:
-          type: array
-          items:
-            $ref: '#/components/schemas/Signer'
-      required:
-      - template_id
-      - signers
     SignDocument:
       type: object
       properties:
@@ -114,22 +95,41 @@ components:
           - requested
           - completed
           - expired
-    Error:
+    Signer:
       type: object
       properties:
-        code:
-          type: integer
-        message:
+        identifier:
           type: string
-        details:
+          description: A single signer identifier - either an email address or a phone number.
+        name:
           type: string
-  responses:
-    Unauthorized:
-      description: Missing or invalid Basic authentication credentials.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
+        reason:
+          type: string
+          description: Reason for signing.
+        sign_type:
+          type: string
+          description: Signature type.
+          enum:
+          - aadhaar
+          - electronic
+          - dsc
+      required:
+      - identifier
+    TemplateSignRequest:
+      type: object
+      properties:
+        template_values:
+          type: object
+          additionalProperties: true
+        template_id:
+          type: string
+        signers:
+          type: array
+          items:
+            $ref: '#/components/schemas/Signer'
+      required:
+      - template_id
+      - signers
   securitySchemes:
     basicAuth:
       type: http

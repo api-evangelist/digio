@@ -166,8 +166,6 @@ apis:
   humanURL: https://documentation.digio.in/digikyc/digilocker/
   baseURL: https://api.digio.in
   tags:
-  - eSign
-  tags_raw:
   - e Sign
   properties:
   - type: OpenAPI
