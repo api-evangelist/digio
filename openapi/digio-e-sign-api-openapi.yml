@@ -101,13 +101,6 @@ paths:
         '401':
           $ref: '#/components/responses/Unauthorized'
 components:
-  responses:
-    Unauthorized:
-      description: Missing or invalid Basic authentication credentials.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
   parameters:
     DocumentId:
       name: document_id
@@ -117,43 +110,6 @@ components:
       schema:
         type: string
   schemas:
-    Error:
-      type: object
-      properties:
-        code:
-          type: integer
-        message:
-          type: string
-        details:
-          type: string
-    UploadDocumentRequest:
-      type: object
-      properties:
-        signers:
-          type: array
-          items:
-            $ref: '#/components/schemas/Signer'
-        expire_in_days:
-          type: integer
-        display_on_page:
-          type: string
-          enum:
-          - first
-          - last
-          - all
-          - custom
-        notify_signers:
-          type: boolean
-        send_sign_link:
-          type: boolean
-        file_name:
-          type: string
-        file_data:
-          type: string
-          description: Base64-encoded PDF content.
-      required:
-      - signers
-      - file_name
     SignDocument:
       type: object
       properties:
@@ -190,6 +146,15 @@ components:
           - requested
           - completed
           - expired
+    Error:
+      type: object
+      properties:
+        code:
+          type: integer
+        message:
+          type: string
+        details:
+          type: string
     Signer:
       type: object
       properties:
@@ -213,6 +178,41 @@ components:
     UploadPdfRequest:
       allOf:
       - $ref: '#/components/schemas/UploadDocumentRequest'
+    UploadDocumentRequest:
+      type: object
+      properties:
+        signers:
+          type: array
+          items:
+            $ref: '#/components/schemas/Signer'
+        expire_in_days:
+          type: integer
+        display_on_page:
+          type: string
+          enum:
+          - first
+          - last
+          - all
+          - custom
+        notify_signers:
+          type: boolean
+        send_sign_link:
+          type: boolean
+        file_name:
+          type: string
+        file_data:
+          type: string
+          description: Base64-encoded PDF content.
+      required:
+      - signers
+      - file_name
+  responses:
+    Unauthorized:
+      description: Missing or invalid Basic authentication credentials.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
   securitySchemes:
     basicAuth:
       type: http

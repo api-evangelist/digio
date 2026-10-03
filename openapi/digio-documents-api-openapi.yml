@@ -42,23 +42,22 @@ paths:
         '401':
           $ref: '#/components/responses/Unauthorized'
 components:
-  responses:
-    Unauthorized:
-      description: Missing or invalid Basic authentication credentials.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
   schemas:
-    Error:
+    TemplateSignRequest:
       type: object
       properties:
-        code:
-          type: integer
-        message:
+        template_values:
+          type: object
+          additionalProperties: true
+        template_id:
           type: string
-        details:
-          type: string
+        signers:
+          type: array
+          items:
+            $ref: '#/components/schemas/Signer'
+      required:
+      - template_id
+      - signers
     SignDocument:
       type: object
       properties:
@@ -95,6 +94,15 @@ components:
           - requested
           - completed
           - expired
+    Error:
+      type: object
+      properties:
+        code:
+          type: integer
+        message:
+          type: string
+        details:
+          type: string
     Signer:
       type: object
       properties:
@@ -115,21 +123,13 @@ components:
           - dsc
       required:
       - identifier
-    TemplateSignRequest:
-      type: object
-      properties:
-        template_values:
-          type: object
-          additionalProperties: true
-        template_id:
-          type: string
-        signers:
-          type: array
-          items:
-            $ref: '#/components/schemas/Signer'
-      required:
-      - template_id
-      - signers
+  responses:
+    Unauthorized:
+      description: Missing or invalid Basic authentication credentials.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
   securitySchemes:
     basicAuth:
       type: http
