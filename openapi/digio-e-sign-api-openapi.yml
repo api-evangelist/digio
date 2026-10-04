@@ -110,6 +110,38 @@ components:
       schema:
         type: string
   schemas:
+    Signer:
+      type: object
+      properties:
+        identifier:
+          type: string
+          description: A single signer identifier - either an email address or a phone number.
+        name:
+          type: string
+        reason:
+          type: string
+          description: Reason for signing.
+        sign_type:
+          type: string
+          description: Signature type.
+          enum:
+          - aadhaar
+          - electronic
+          - dsc
+      required:
+      - identifier
+    Error:
+      type: object
+      properties:
+        code:
+          type: integer
+        message:
+          type: string
+        details:
+          type: string
+    UploadPdfRequest:
+      allOf:
+      - $ref: '#/components/schemas/UploadDocumentRequest'
     SignDocument:
       type: object
       properties:
@@ -146,38 +178,6 @@ components:
           - requested
           - completed
           - expired
-    Error:
-      type: object
-      properties:
-        code:
-          type: integer
-        message:
-          type: string
-        details:
-          type: string
-    Signer:
-      type: object
-      properties:
-        identifier:
-          type: string
-          description: A single signer identifier - either an email address or a phone number.
-        name:
-          type: string
-        reason:
-          type: string
-          description: Reason for signing.
-        sign_type:
-          type: string
-          description: Signature type.
-          enum:
-          - aadhaar
-          - electronic
-          - dsc
-      required:
-      - identifier
-    UploadPdfRequest:
-      allOf:
-      - $ref: '#/components/schemas/UploadDocumentRequest'
     UploadDocumentRequest:
       type: object
       properties:

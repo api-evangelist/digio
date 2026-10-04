@@ -43,21 +43,35 @@ paths:
           $ref: '#/components/responses/Unauthorized'
 components:
   schemas:
-    TemplateSignRequest:
+    Error:
       type: object
       properties:
-        template_values:
-          type: object
-          additionalProperties: true
-        template_id:
+        code:
+          type: integer
+        message:
           type: string
-        signers:
-          type: array
-          items:
-            $ref: '#/components/schemas/Signer'
+        details:
+          type: string
+    Signer:
+      type: object
+      properties:
+        identifier:
+          type: string
+          description: A single signer identifier - either an email address or a phone number.
+        name:
+          type: string
+        reason:
+          type: string
+          description: Reason for signing.
+        sign_type:
+          type: string
+          description: Signature type.
+          enum:
+          - aadhaar
+          - electronic
+          - dsc
       required:
-      - template_id
-      - signers
+      - identifier
     SignDocument:
       type: object
       properties:
@@ -94,35 +108,21 @@ components:
           - requested
           - completed
           - expired
-    Error:
+    TemplateSignRequest:
       type: object
       properties:
-        code:
-          type: integer
-        message:
+        template_values:
+          type: object
+          additionalProperties: true
+        template_id:
           type: string
-        details:
-          type: string
-    Signer:
-      type: object
-      properties:
-        identifier:
-          type: string
-          description: A single signer identifier - either an email address or a phone number.
-        name:
-          type: string
-        reason:
-          type: string
-          description: Reason for signing.
-        sign_type:
-          type: string
-          description: Signature type.
-          enum:
-          - aadhaar
-          - electronic
-          - dsc
+        signers:
+          type: array
+          items:
+            $ref: '#/components/schemas/Signer'
       required:
-      - identifier
+      - template_id
+      - signers
   responses:
     Unauthorized:
       description: Missing or invalid Basic authentication credentials.

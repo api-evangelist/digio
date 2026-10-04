@@ -65,7 +65,23 @@ paths:
         '401':
           $ref: '#/components/responses/Unauthorized'
 components:
+  responses:
+    Unauthorized:
+      description: Missing or invalid Basic authentication credentials.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
   schemas:
+    Error:
+      type: object
+      properties:
+        code:
+          type: integer
+        message:
+          type: string
+        details:
+          type: string
     KycRequest:
       type: object
       properties:
@@ -84,15 +100,6 @@ components:
       required:
       - customer_identifier
       - template_name
-    Error:
-      type: object
-      properties:
-        code:
-          type: integer
-        message:
-          type: string
-        details:
-          type: string
     KycResponse:
       type: object
       properties:
@@ -123,13 +130,6 @@ components:
         created_at:
           type: string
           format: date-time
-  responses:
-    Unauthorized:
-      description: Missing or invalid Basic authentication credentials.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
   securitySchemes:
     basicAuth:
       type: http

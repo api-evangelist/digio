@@ -78,7 +78,45 @@ paths:
         '401':
           $ref: '#/components/responses/Unauthorized'
 components:
+  responses:
+    Unauthorized:
+      description: Missing or invalid Basic authentication credentials.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
   schemas:
+    Error:
+      type: object
+      properties:
+        code:
+          type: integer
+        message:
+          type: string
+        details:
+          type: string
+    Mandate:
+      type: object
+      properties:
+        mandate_id:
+          type: string
+        state:
+          type: string
+          enum:
+          - register_initiated
+          - register_success
+          - register_failed
+          - cancelled
+        npci_txn_id:
+          type: string
+        umrn:
+          type: string
+          description: Unique Mandate Reference Number issued by NPCI.
+        maximum_amount:
+          type: number
+        created_at:
+          type: string
+          format: date-time
     CreateMandateRequest:
       type: object
       properties:
@@ -119,37 +157,6 @@ components:
       required:
       - customer_identifier
       - maximum_amount
-    Error:
-      type: object
-      properties:
-        code:
-          type: integer
-        message:
-          type: string
-        details:
-          type: string
-    Mandate:
-      type: object
-      properties:
-        mandate_id:
-          type: string
-        state:
-          type: string
-          enum:
-          - register_initiated
-          - register_success
-          - register_failed
-          - cancelled
-        npci_txn_id:
-          type: string
-        umrn:
-          type: string
-          description: Unique Mandate Reference Number issued by NPCI.
-        maximum_amount:
-          type: number
-        created_at:
-          type: string
-          format: date-time
   parameters:
     MandateId:
       name: mandate_id
@@ -158,13 +165,6 @@ components:
       description: Mandate identifier.
       schema:
         type: string
-  responses:
-    Unauthorized:
-      description: Missing or invalid Basic authentication credentials.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
   securitySchemes:
     basicAuth:
       type: http
