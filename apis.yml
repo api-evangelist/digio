@@ -36,6 +36,15 @@ accessModel:
   method: derived
 image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/digio.png
 tags:
+- E-Signature
+- KYC
+- eNACH
+- eMandate
+- Digital Signature
+- India
+- Fintech
+- Identity Verification
+tags_raw:
 - eSign
 - KYC
 - eNACH
@@ -166,6 +175,8 @@ apis:
   humanURL: https://documentation.digio.in/digikyc/digilocker/
   baseURL: https://api.digio.in
   tags:
+  - E-Signature
+  tags_raw:
   - e Sign
   properties:
   - type: OpenAPI
