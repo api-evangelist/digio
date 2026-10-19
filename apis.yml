@@ -88,60 +88,6 @@ apis:
   description: >-
     DigiShield - Anti-Money-Laundering and Counter-Financing-of-Terrorism screening and ongoing monitoring
     against sanctions and watchlists.
-- aid: digio:digio-documents-api
-  name: Digio Documents API
-  description: DigiDocs - template-based document and agreement creation with eStamp.
-  humanURL: https://documentation.digio.in/digisign/
-  baseURL: https://api.digio.in
-  tags:
-  - Documents
-  properties:
-  - type: OpenAPI
-    url: openapi/digio-documents-api-openapi.yml
-  - type: Documentation
-    url: https://documentation.digio.in/digisign/
-  - type: APIReference
-    url: https://documentation.digio.in/digisign/api_integration/create_sign_request/
-  - type: Documentation
-    url: https://documentation.digio.in/digicollect/nach/nach_registration/
-  - type: APIReference
-    url: https://documentation.digio.in/digicollect/nach/nach_registration/get_mandate_details/
-  - type: Documentation
-    url: https://documentation.digio.in/digikyc/
-  - type: APIReference
-    url: https://documentation.digio.in/digikyc/ckyc/api_integration/
-  - type: Documentation
-    url: https://documentation.digio.in/digidocs/
-  - type: APIReference
-    url: >-
-      https://documentation.digio.in/digidocs/api_integration/create_document_from_template_api/
-- aid: digio:digio-emandate-api
-  name: Digio eMandate API
-  description: DigiCollect - eNACH / NACH electronic mandates for recurring debit.
-  humanURL: https://documentation.digio.in/digisign/
-  baseURL: https://api.digio.in
-  tags:
-  - eMandate
-  properties:
-  - type: OpenAPI
-    url: openapi/digio-emandate-api-openapi.yml
-  - type: Documentation
-    url: https://documentation.digio.in/digisign/
-  - type: APIReference
-    url: https://documentation.digio.in/digisign/api_integration/create_sign_request/
-  - type: Documentation
-    url: https://documentation.digio.in/digicollect/nach/nach_registration/
-  - type: APIReference
-    url: https://documentation.digio.in/digicollect/nach/nach_registration/get_mandate_details/
-  - type: Documentation
-    url: https://documentation.digio.in/digikyc/
-  - type: APIReference
-    url: https://documentation.digio.in/digikyc/ckyc/api_integration/
-  - type: Documentation
-    url: https://documentation.digio.in/digidocs/
-  - type: APIReference
-    url: >-
-      https://documentation.digio.in/digidocs/api_integration/create_document_from_template_api/
 - aid: digio:digio-kyc-api
   name: Digio KYC API
   description: DigiKYC - identity verification via CKYC, KRA, DigiLocker, and offline Aadhaar.
@@ -169,18 +115,97 @@ apis:
   - type: APIReference
     url: >-
       https://documentation.digio.in/digidocs/api_integration/create_document_from_template_api/
-- aid: digio:digio-e-sign-api
-  name: Digio e Sign API
-  description: DigiSign - Aadhaar and OTP based legally-valid electronic signatures.
+- aid: digio:digio-client-api
+  name: Digio Client API
+  description: The Client API from Digio — 79 operation(s) for client.
   humanURL: https://documentation.digio.in/digikyc/digilocker/
   baseURL: https://api.digio.in
   tags:
-  - E-Signature
-  tags_raw:
-  - e Sign
+  - Client
   properties:
   - type: OpenAPI
-    url: openapi/digio-e-sign-api-openapi.yml
+    url: openapi/digio-client-api-openapi.yml
+  - type: Documentation
+    url: https://documentation.digio.in/digisign/
+  - type: APIReference
+    url: https://documentation.digio.in/digisign/api_integration/create_sign_request/
+  - type: Documentation
+    url: https://documentation.digio.in/digicollect/nach/nach_registration/
+  - type: APIReference
+    url: https://documentation.digio.in/digicollect/nach/nach_registration/get_mandate_details/
+  - type: Documentation
+    url: https://documentation.digio.in/digikyc/
+  - type: APIReference
+    url: https://documentation.digio.in/digikyc/ckyc/api_integration/
+  - type: Documentation
+    url: https://documentation.digio.in/digidocs/
+  - type: APIReference
+    url: >-
+      https://documentation.digio.in/digidocs/api_integration/create_document_from_template_api/
+- aid: digio:digio-form-api
+  name: Digio Form API
+  description: The Form API from Digio — 1 operation(s) for form.
+  humanURL: https://documentation.digio.in/digikyc/digilocker/
+  baseURL: https://api.digio.in
+  tags:
+  - Form
+  properties:
+  - type: OpenAPI
+    url: openapi/digio-form-api-openapi.yml
+  - type: Documentation
+    url: https://documentation.digio.in/digisign/
+  - type: APIReference
+    url: https://documentation.digio.in/digisign/api_integration/create_sign_request/
+  - type: Documentation
+    url: https://documentation.digio.in/digicollect/nach/nach_registration/
+  - type: APIReference
+    url: https://documentation.digio.in/digicollect/nach/nach_registration/get_mandate_details/
+  - type: Documentation
+    url: https://documentation.digio.in/digikyc/
+  - type: APIReference
+    url: https://documentation.digio.in/digikyc/ckyc/api_integration/
+  - type: Documentation
+    url: https://documentation.digio.in/digidocs/
+  - type: APIReference
+    url: >-
+      https://documentation.digio.in/digidocs/api_integration/create_document_from_template_api/
+- aid: digio:digio-sign-api
+  name: Digio Sign API
+  description: The Sign API from Digio — 2 operation(s) for sign.
+  humanURL: https://documentation.digio.in/digikyc/digilocker/
+  baseURL: https://api.digio.in
+  tags:
+  - Sign
+  properties:
+  - type: OpenAPI
+    url: openapi/digio-sign-api-openapi.yml
+  - type: Documentation
+    url: https://documentation.digio.in/digisign/
+  - type: APIReference
+    url: https://documentation.digio.in/digisign/api_integration/create_sign_request/
+  - type: Documentation
+    url: https://documentation.digio.in/digicollect/nach/nach_registration/
+  - type: APIReference
+    url: https://documentation.digio.in/digicollect/nach/nach_registration/get_mandate_details/
+  - type: Documentation
+    url: https://documentation.digio.in/digikyc/
+  - type: APIReference
+    url: https://documentation.digio.in/digikyc/ckyc/api_integration/
+  - type: Documentation
+    url: https://documentation.digio.in/digidocs/
+  - type: APIReference
+    url: >-
+      https://documentation.digio.in/digidocs/api_integration/create_document_from_template_api/
+- aid: digio:digio-user-api
+  name: Digio User API
+  description: The User API from Digio — 1 operation(s) for user.
+  humanURL: https://documentation.digio.in/digikyc/digilocker/
+  baseURL: https://api.digio.in
+  tags:
+  - User
+  properties:
+  - type: OpenAPI
+    url: openapi/digio-user-api-openapi.yml
   - type: Documentation
     url: https://documentation.digio.in/digisign/
   - type: APIReference

@@ -1,137 +1,695 @@
 openapi: 3.2.0
 info:
-  title: Digio KYC API
-  description: Digio is an India-based digital trust and paperwork automation platform offering legally-valid Aadhaar/OTP eSign, eStamping, KYC (CKYC, KRA, DigiLocker, offline Aadhaar, Video KYC), eNACH/NACH eMandates, UPI Autopay, AML/CFT screening, and document/agreement management over a REST API. All requests use HTTPS with HTTP Basic authentication (Base64 of client_id:client_secret). Asynchronous status updates are delivered via HTTP webhooks; there is no WebSocket surface.
-  version: '1.0'
+  title: Digio Kyc API
+  description: Getting started with Digio Rest Apis
   contact:
-    name: Digio Developer Support
-    url: https://documentation.digio.in/
-    email: tech@digio.in
-  termsOfService: https://www.digio.in/
+    email: support@digio.in
 servers:
 - url: https://api.digio.in
-  description: Production
-- url: https://ext.digio.in
-  description: Sandbox / Test
-security:
-- basicAuth: []
+  description: Server URL in Production Environment
 tags:
 - name: KYC
-  description: DigiKYC - identity verification via CKYC, KRA, DigiLocker, and offline Aadhaar.
 paths:
-  /client/kyc/v2/request/with_template:
+  /v4/kyc/analyze/file/extract_multi_sign:
     post:
-      operationId: createKycRequest
+      summary: Signature Extraction API
+      description: Call this API to extract signatures from a jpg/jpeg/png image. Responses are generated in different image sizes based on need on corporate. All encodings in request and response are strictly BASE64.
+      operationId: signExtractionV2_1
+      parameters:
+      - name: only_signature_present
+        in: query
+        schema:
+          type: boolean
+      requestBody:
+        content:
+          '*/*':
+            schema:
+              $ref: '#/components/schemas/SignatureExtractionRequest'
+      responses:
+        400:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GenericBadRequestResponse'
+              examples:
+                Data Encoding Error:
+                  description: Data Encoding Error
+                  value:
+                    details: EX230910235116826BDI
+                    code: DATA_ENCODING_ERROR
+                    message: Data is not encoded as per mentioned method
+                Bad Request:
+                  description: Bad Request
+                  value:
+                    details: EX23297402937402
+                    code: REQUEST_VALIDATION_FAILED
+                    message: Request Validation Failed
+        200:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OcrResponse'
+              examples:
+                Success:
+                  description: Success
+                  value:
+                    sign_count: 1
+                    signatures:
+                    - - size:
+                          height: 100
+                          width: 100
+                        color: BLUE
+                        encoded_image: (Base 64 Encoded Image of the Signature)
+      security:
+      - api_auth: []
       tags:
       - KYC
-      summary: Create a KYC request with a template
-      description: Initiates a KYC verification workflow using a pre-configured DigiKYC template (Aadhaar offline, DigiLocker, ID proof, CKYC, KRA, Video KYC). Returns a request id prefixed with KID.
+  /v4/kyc/analyze/file/liveness:
+    post:
+      summary: Liveness Check API
+      description: Call this API for passive liveness check from an image
+      operationId: livenessCheck_1
       requestBody:
-        required: true
+        content:
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/LivenessCheckRequest'
+      responses:
+        default:
+          description: default response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationCheckResponse'
+      security:
+      - api_auth: []
+      tags:
+      - KYC
+  /v4/kyc/aadhaar/file/mask:
+    post:
+      summary: Aadhaar Masking API
+      description: Call this API to get masked image of the Aadhaar Card
+      operationId: maskAadhaarFile_2
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/AadhaarMaskingRequest'
+      responses:
+        400:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GenericBadRequestResponse'
+              examples:
+                Bad Request:
+                  description: Bad Request
+                  value:
+                    details: EX23297402937402
+                    code: REQUEST_VALIDATION_FAILED
+                    message: Request Validation Failed
+        200:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AadhaarMaskingResponse'
+              examples:
+                Success:
+                  description: Success
+                  value:
+                    masked_output: (Base 64 encoded string of Masked Aadhaar Image)
+                    details:
+                      already_masked_count: 1
+                      masking_done_count: 1
+      security:
+      - api_auth: []
+      tags:
+      - KYC
+  /v4/kyc/analyze/file/idcard:
+    post:
+      summary: ID Card OCR and Verification API
+      description: ID Card OCR and Verification API Details
+      operationId: analyzeMultipleFileOcr_1
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/IdCardAnalysisFormRequestv4'
+      responses:
+        400:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GenericBadRequestResponse'
+              examples:
+                Bad Request:
+                  description: Bad Request
+                  value:
+                    details: EX23297402937402
+                    code: BAD_REQUEST
+                    message: Primary file is mandatory to perform OCR
+        200:
+          description: ID Analysis Successful!
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OcrResponse'
+              examples:
+                Success:
+                  description: Success
+                  value:
+                    details:
+                      status: true
+                    detections:
+                    - id_type: AADHAAR
+                      detected_part: BOTH
+                      id_attributes:
+                        name: ''
+                        id_no: ''
+                        dob: 21/08/1987
+                        address: ''
+                        gender: male
+                        address_information:
+                          address: ''
+                          locality_or_post_office: ''
+                          district_or_city: ''
+                          state: ''
+                          pincode: '560102'
+                        phone_number: ''
+                      output_images:
+                        front_part: '{Base64 Photo}'
+                        back_part: '{Base64 Photo}'
+                        photo: '{Base64 Photo}'
+                        signature: '{Base64 Photo}'
+                      front_image_checks_result:
+                        BLACK_AND_WHITE_IMAGE: PASS
+                        BLUR_IMAGE: PASS
+                      back_image_checks_result:
+                        BLACK_AND_WHITE_IMAGE: PASS
+                        BLUR_IMAGE: FAIL
+                      verification_result:
+                        verified: false
+      security:
+      - api_auth: []
+      tags:
+      - KYC
+  /v4/kyc/aadhaar/mask:
+    post:
+      summary: Aadhaar Masking API (Base64 Approach)
+      description: 'Call this API to get Masked Image of the Aadhaar Card
+
+        Please Note: Try to keep the file size as small as possible for faster results and not more than 1 MB as a good practice.'
+      operationId: maskAadhaarImageBase64_2
+      requestBody:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/KycRequest'
+              $ref: '#/components/schemas/ImageMaskingRequest'
       responses:
-        '200':
-          description: KYC request created
+        400:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/KycResponse'
-        '401':
-          $ref: '#/components/responses/Unauthorized'
-  /client/kyc/v2/{request_id}/response:
-    get:
-      operationId: getKycResponse
+                $ref: '#/components/schemas/GenericBadRequestResponse'
+              examples:
+                Bad Request:
+                  description: Bad Request
+                  value:
+                    details: EX23297402937402
+                    code: REQUEST_VALIDATION_FAILED
+                    message: Request Validation Failed
+        200:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AadhaarMaskingResponse'
+              examples:
+                Success:
+                  description: Success
+                  value:
+                    masked_output: (Base 64 encoded string of Masked Aadhaar Image)
+                    details:
+                      already_masked_count: 0
+                      masking_done_count: 2
+      security:
+      - api_auth: []
       tags:
       - KYC
-      summary: Get KYC request response
-      description: Fetches the collected identity data, extracted fields, and verification result for a completed KYC request.
-      parameters:
-      - name: request_id
-        in: path
-        required: true
-        description: KYC request identifier (KID...).
-        schema:
-          type: string
-      responses:
-        '200':
-          description: KYC response
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/KycResponse'
-        '401':
-          $ref: '#/components/responses/Unauthorized'
 components:
-  responses:
-    Unauthorized:
-      description: Missing or invalid Basic authentication credentials.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
   schemas:
-    Error:
+    ImagesResponse:
       type: object
       properties:
-        code:
-          type: integer
-        message:
+        front_part:
           type: string
+          description: Front part of the ID Card in base64 format
+        back_part:
+          type: string
+          description: Back part of the ID Card in base64 format
+        photo:
+          type: string
+          description: Photo detected from the ID Card in base64 format
+        signature:
+          type: string
+          description: Signature from the ID Card in base64 format
+        front_masked_image:
+          type: string
+          description: In case of masking, front masked image from the ID Card in base64 format
+        back_masked_image:
+          type: string
+          description: In case of masking, back masked image from the ID Card in base64 format
+    GenericVerificationResponse:
+      type: object
+      properties:
+        verified:
+          type: boolean
+          description: In case of verification, status of the verification
+        result:
+          type: object
+          additionalProperties:
+            type: boolean
+            description: In case of verification, result from the verification
+          description: In case of verification, result from the verification
+        data:
+          type: object
+          additionalProperties:
+            type: object
+            description: In case of verification, additional data from the verification
+          description: In case of verification, additional data from the verification
+        error_message:
+          type: string
+          description: In case of verification, error message from the verification process
+    IdAttributesResult:
+      type: object
+      properties:
+        name:
+          type: string
+          description: Name detected from the ID Card
+        fathers_name:
+          type: string
+          description: Father's Name detected from the ID Card
+        mothers_name:
+          type: string
+          description: Mother's Name detected from the ID Card
+        husbands_name:
+          type: string
+          description: Mother's Name detected from the ID Card
+        id_no:
+          type: string
+          description: ID Number detected from the ID Card
+        dob:
+          type: string
+          description: DOB detected from the ID Card
+        date_of_incorporation:
+          type: string
+          description: Date of Incorporation
+        year_of_birth:
+          type: string
+          description: Year of birth according to the ID Card
+        address:
+          type: string
+          description: Address detected from the ID Card
+        gender:
+          type: string
+          description: Gender detected from the ID Card
+        date_of_issue:
+          type: string
+          description: Date of the issue of ID Card
+        bank_name:
+          type: string
+          description: If id_type is CHEQUE, detected bank name from Cheque
+        account_no:
+          type: string
+          description: If id_type is CHEQUE, detected account number from Cheque
+        ifsc:
+          type: string
+          description: If id_type is CHEQUE, detected IFSC from Cheque
+        engine_no:
+          type: string
+          description: If id_type is VEHICLE_RC, detected engine number
+        chassis_no:
+          type: string
+          description: If id_type is VEHICLE_RC, detected chassis number
+        file_no:
+          type: string
+          description: If id_type is PASSPORT, detected file number
+        type:
+          type: string
+          description: If id_type is PASSPORT, detected type
+        country_code:
+          type: string
+          description: If id_type is PASSPORT, detected country code
+        sur_name:
+          type: string
+          description: If id_type is PASSPORT, detected surname
+        nationality:
+          type: string
+          description: If id_type is PASSPORT, detected nationality
+        place_of_birth:
+          type: string
+          description: If id_type is PASSPORT, detected place of birth
+        place_of_issue:
+          type: string
+          description: If id_type is PASSPORT, detected place of issue of the passport
+        date_of_expiry:
+          type: string
+          description: If id_type is PASSPORT, detected expiry date of the passport
+        spouces_name:
+          type: string
+          description: If id_type is PASSPORT, detected spouse name
+        cin:
+          type: string
+          description: In case of business verification, detected Corporate Identification Number
+        din:
+          type: string
+          description: In case of business verification, detected Director Identification Number
+        tin:
+          type: string
+          description: In case of business verification, detected Taxpayer Identification Number
+        validity:
+          type: string
+          description: Detected Validity of the card
+        vehicle_types:
+          type: array
+          description: Detected Vehicle types from the ID Card
+          items:
+            type: string
+            description: Detected Vehicle types from the ID Card
+        address_information:
+          $ref: '#/components/schemas/ImageAddressObj'
+        phone_number:
+          type: string
+          description: Phone Number detected from the ID Card
+        old_passport_no:
+          type: string
+          description: If id_type is PASSPORT, detected old_passport_no
+        old_passport_date:
+          type: string
+          description: If id_type is PASSPORT, detected old_passport_issue_date
+      description: Attributes detected from the ID Card
+    AadhaarMaskingRequest:
+      required:
+      - consent
+      - file
+      type: object
+      properties:
+        file:
+          type: string
+          description: Aadhaar image file in JPEG/JPG/PNG or PDF format
+          format: binary
+        consent:
+          type: string
+          description: yes/no. Positive consent is mandatory to perform this action.
+        file_name:
+          type: string
+          description: Response file name if it has to be a specific one. Output given will always be in .png
+        unique_request_id:
+          type: string
+          description: Unique request id for traceability of request and recon purpose. Businesses are required to pass unique id for every request.
+    LivenessCheckRequest:
+      required:
+      - image
+      type: object
+      properties:
+        image:
+          type: string
+          description: Image file in JPEG/JPG/PNG or PDF format on which the liveness check is to be performed
+          format: binary
+        unique_request_id:
+          type: string
+          description: Unique request id for traceability of request and recon purpose. Businesses are required to pass unique id for every request.
+    ImageDimension:
+      required:
+      - height
+      - width
+      type: object
+      properties:
+        height:
+          type: integer
+          description: Height of image
+          format: int32
+          example: 100
+        width:
+          type: integer
+          description: Width of image
+          format: int32
+          example: 100
+      description: Size has two attributes denoting height and width
+    IdCardAnalysisFormRequestv4:
+      required:
+      - back_part
+      - front_part
+      type: object
+      properties:
+        front_part:
+          type: string
+          description: Front Part of ID Card
+          format: binary
+        back_part:
+          type: string
+          description: Back Part of ID card
+          format: binary
+        unique_request_id:
+          type: string
+          description: Unique request id for traceability of request and recon purpose. Businesses are required to pass unique id for every request.
+        additional_request:
+          type: string
+          description: Contains Options For OCR API
+          example: '{"features":["MASK","CROP_ALIGN","VERIFY","SIGNATURE_EXTRACT","FACE_EXTRACT","SECURITY_FEATURE"],"expected_ids":["AADHAAR","PAN"],"additional_checks":["BLUR_IMAGE","BLACK_AND_WHITE_IMAGE"]}'
+    SignatureExtractionRequest:
+      required:
+      - encoded_image
+      type: object
+      properties:
+        sizes:
+          type: array
+          description: Size has two attributes denoting height and width
+          items:
+            $ref: '#/components/schemas/ImageDimension'
+        encoded_image:
+          type: string
+          description: Encoded image of the signature
+    GenericBadRequestResponse:
+      type: object
+      properties:
         details:
           type: string
-    KycRequest:
+          description: Details about the exception. Usually contains the exception id for reference.
+        code:
+          type: string
+          description: Error code
+        message:
+          type: string
+          description: Description of the error
+        errors:
+          type: string
+          description: Custom errors
+    ImageAddressObj:
       type: object
       properties:
-        customer_identifier:
+        address:
           type: string
-          description: Customer email or phone number.
-        customer_name:
+          description: Full Address detected from the ID Card
+        locality_or_post_office:
           type: string
-        template_name:
+          description: Locality detected from the ID Card
+        district_or_city:
           type: string
-          description: DigiKYC workflow template name.
-        notify_customer:
-          type: boolean
-        generate_access_token:
-          type: boolean
-      required:
-      - customer_identifier
-      - template_name
-    KycResponse:
+          description: District or City detected from the ID Card
+        state:
+          type: string
+          description: State detected from the ID Card
+        pincode:
+          type: string
+          description: Pincode detected from the ID Card
+    AadhaarMaskingResponse:
       type: object
       properties:
-        id:
+        masked_output:
           type: string
-          description: KYC request identifier (KID...).
-        status:
+          description: Base64 encoded image of Masked Aadhaar Card
+        error_message:
           type: string
+          description: Error message indicating cause of error.
+        details:
+          $ref: '#/components/schemas/AadhaarMaskingInformation'
+    ValidationCheckResponse:
+      type: object
+      properties:
+        score:
+          type: number
+          description: Confidence of image being live or real/acceptable. Higher the better
+          format: double
+        result:
+          type: string
+          description: Result for the validation check (UNKNOWN is from Gray-area where manual verification can be done if you don't want customers to reattempt). Ideally consider Unknown also as Fail and ask user to reattempt.
           enum:
-          - requested
-          - approval_pending
-          - approved
-          - rejected
-        customer_identifier:
+          - PASS
+          - FAIL
+          - UNKNOWN
+        errors:
+          type: array
+          description: In case there are errors, list of errors found in image
+          items:
+            type: string
+            description: In case there are errors, list of errors found in image
+        count:
+          type: integer
+          description: Count
+          format: int32
+      description: Results from the checks for the back part of the ID Card
+    OcrStatusResponse:
+      required:
+      - status
+      type: object
+      properties:
+        status:
+          type: boolean
+          description: OCR Status (true/false)
+          example: true
+        error_code:
           type: string
-        actions:
+          description: Error code if status is false
+        error_message:
+          type: string
+          description: Error Description if status is false
+    AadhaarMaskingInformation:
+      type: object
+      properties:
+        already_masked_count:
+          type: integer
+          description: Number of instances where detail was already masked. eg. If a document has 3 instances of Aadhaar number where 2 instances are already masked, then this count will bet 2
+          format: int32
+        masking_done_count:
+          type: integer
+          description: Number of instances where the masking is done eg. In a document if Aadhaar number appears 4 times in a document then this count will be 4
+          format: int32
+      description: Masking Details
+    IdCardOcrResult:
+      type: object
+      properties:
+        id_type:
+          type: string
+          description: Type of the ID Card detected from OCR
+          enum:
+          - PAN
+          - FORM_60
+          - VOTER_ID
+          - AADHAAR
+          - EAADHAAR
+          - PASSPORT
+          - DRIVING_LICENSE
+          - CHEQUE
+          - VEHICLE_RC
+          - CIN
+          - DIN
+          - TAN
+          - TIN
+          - UAADHAAR
+          - FSSAI
+          - OTHER
+          - KRA_PAN
+          - E_STAMP
+          - GST
+          - PAN_ADVANCED
+          - IFSC
+          - UDYAMAADHAAR
+          - PAN_GST
+          - GST_ADVANCED
+          - CIN_ADVANCED
+          - BANK_STATEMENT
+        detected_part:
+          type: string
+          description: Describes if the detected part of the ID Card is FRONT, BACK or both
+          enum:
+          - FRONT
+          - BACK
+          - BOTH
+        id_attributes:
+          $ref: '#/components/schemas/IdAttributesResult'
+        output_images:
+          $ref: '#/components/schemas/ImagesResponse'
+        detected_security_features:
+          uniqueItems: true
+          type: array
+          description: The type of security feature for the ID Card
+          items:
+            type: string
+            description: The type of security feature for the ID Card
+            enum:
+            - QR_CODE
+            - BAR_CODE
+            - HOLOGRAM
+        front_image_checks_result:
+          type: object
+          additionalProperties:
+            $ref: '#/components/schemas/ValidationCheckResponse'
+          description: Results from the checks for the front part of the ID Card
+        back_image_checks_result:
+          type: object
+          additionalProperties:
+            $ref: '#/components/schemas/ValidationCheckResponse'
+          description: Results from the checks for the back part of the ID Card
+        verification_result:
+          $ref: '#/components/schemas/GenericVerificationResponse'
+        empty:
+          type: boolean
+    OcrResponse:
+      type: object
+      properties:
+        details:
+          $ref: '#/components/schemas/OcrStatusResponse'
+        detections:
           type: array
           items:
-            type: object
-            properties:
-              type:
-                type: string
-              status:
-                type: string
-              details:
-                type: object
-                additionalProperties: true
-        created_at:
+            $ref: '#/components/schemas/IdCardOcrResult'
+    ImageMaskingRequest:
+      required:
+      - consent
+      - data
+      type: object
+      properties:
+        reference_id:
+          maxLength: 32
+          minLength: 1
+          pattern: ^[A-Za-z0-9-_]*$
           type: string
-          format: date-time
+          description: Reference ID
+        unique_request_id:
+          maxLength: 32
+          minLength: 1
+          pattern: ^[A-Za-z0-9-_]*$
+          type: string
+          description: Unique request id for traceability of request and recon purpose. Businesses are required to pass unique id for every request.
+        data:
+          type: string
+          description: Base64 encoded Aadhaar image file in JPEG/JPG or PNG format. If you want to use PDF pass another attribute “data_content_type”:”PDF”
+        file_name:
+          type: string
+          description: Response file name if it has to be a specific one. Always given with .png
+        data_content_type:
+          type: string
+          description: It is the type of file upload supported for masking.
+          enum:
+          - PNG
+          - JPEG
+          - JPG
+          - PDF
+        is_validate:
+          type: boolean
+          description: Pass True if you wish to get the document validated (whether it is an Aadhaar or not)
+        consent:
+          type: string
+          description: yes/no
+          enum:
+          - 'yes'
+          - 'no'
+          default: 'yes'
+        mask_qr:
+          type: boolean
+          description: true/false
   securitySchemes:
-    basicAuth:
+    api_auth:
       type: http
+      in: header
       scheme: basic
-      description: 'HTTP Basic authentication. Send the header Authorization: Basic Base64(client_id:client_secret).'

@@ -1,0 +1,12 @@
+{
+ "url": "https://api.digio.in/openapi.yaml",
+ "final": "https://api.digio.in/openapi.yaml",
+ "status": 200,
+ "content_type": "application/yaml",
+ "bytes": 682777,
+ "sha256": "e27b0435fcf490ce6958a9bf18f30b2cda8a2e65965aa53dba82631e00809456",
+ "fetched_at": "2026-10-19",
+ "fetched_by": "APIEvangelist-Harvest/1.0 (+https://apievangelist.com)",
+ "match": "byte-identical",
+ "note": "re-archived: the provider's current document replaced a stale archive (roadmap#793); the old files are in openapi/_superseded/2026-10-19-stale"
+}

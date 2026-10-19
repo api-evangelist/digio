@@ -1,0 +1,113 @@
+openapi: 3.2.0
+info:
+  title: Digio Form API
+  description: Getting started with Digio Rest Apis
+  contact:
+    email: support@digio.in
+servers:
+- url: https://api.digio.in
+  description: Server URL in Production Environment
+tags:
+- name: Form
+paths:
+  /form/request/response:
+    post:
+      summary: Get Forms Data Request Details API
+      operationId: getFilteredFilledFormResponseData
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/FormResponseFilter'
+      responses:
+        400:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GenericBadRequestResponse'
+              examples:
+                Bad Request:
+                  description: Bad Request
+                  value:
+                    details: EX23297402937402
+                    code: REQUEST_VALIDATION_FAILED
+                    message: Request Validation Failed
+        200:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GenericSuccessResponse'
+      tags:
+      - Form
+components:
+  schemas:
+    GenericBadRequestResponse:
+      type: object
+      properties:
+        details:
+          type: string
+          description: Details about the exception. Usually contains the exception id for reference.
+        code:
+          type: string
+          description: Error code
+        message:
+          type: string
+          description: Description of the error
+        errors:
+          type: string
+          description: Custom errors
+    GenericSuccessResponse:
+      type: object
+      properties:
+        success:
+          type: boolean
+          description: Depicting whether the request failed or not
+    FormResponseFilter:
+      required:
+      - formId
+      type: object
+      properties:
+        formId:
+          type: string
+        requestIds:
+          type: array
+          items:
+            type: string
+        customerIdentifier:
+          type: string
+          description: customer Identifier
+        clientReferenceId:
+          type: string
+          description: client Reference Id
+        status:
+          type: array
+          description: status
+          items:
+            type: string
+            description: status
+            enum:
+            - REQUESTED
+            - SENT_FOR_SIGNING
+            - COMPLETED
+            - REJECTED
+            - EXPIRED
+            - IN_PROGRESS
+        startTime:
+          type: integer
+          description: start time
+          format: int64
+        endTime:
+          type: integer
+          description: end time
+          format: int64
+        isHosted:
+          type: boolean
+          description: is hosted
+        hasDocument:
+          type: boolean
+          description: has document
+  securitySchemes:
+    api_auth:
+      type: http
+      in: header
+      scheme: basic
