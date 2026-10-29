@@ -1,4 +1,4 @@
-# Digio (digio)
+# Digio
 
 <!-- API-EVANGELIST-PROVENANCE:BEGIN -->
 > ### About this repository
@@ -66,160 +66,154 @@
 
 Digio is an India-based digital trust and paperwork automation platform. Its REST APIs deliver legally-valid Aadhaar and OTP eSign, eStamping, KYC (CKYC, KRA, DigiLocker, offline Aadhaar, and Video KYC), eNACH/NACH eMandates and UPI Autopay recurring payments, AML/CFT screening, and template-based document and agreement management. All endpoints use HTTPS with HTTP Basic authentication.
 
-**APIs.json:** [https://raw.githubusercontent.com/api-evangelist/digio/refs/heads/main/apis.yml](https://raw.githubusercontent.com/api-evangelist/digio/refs/heads/main/apis.yml)
+**Areas:** E-Signature · KYC · eNACH · eMandate · Digital Signature · India · Fintech · Identity Verification
 
-## Tags
+## Digio on APIs.io
 
-- eSign
-- KYC
-- eNACH
-- eMandate
-- Digital Signature
-- India
-- Fintech
-- Identity Verification
+Everything profiled for Digio is published on APIs.io rather than in this repository. Start at the provider page — **[apis.io/providers/digio/](https://apis.io/providers/digio/)** — or go straight to one of the APIs or properties below.
 
-## Timestamps
+### APIs (6)
 
-- **Created:** 2026-07-17
-- **Modified:** 2026-07-17
+- [Digio DigiLocker API](https://apis.io/apis/digio/digio-digilocker-api/) — Fetch government-issued documents (Aadhaar, PAN, driving licence and others) directly from India's DigiLocker with citizen consent for KYC.
+- [Digio AML/CFT API](https://apis.io/apis/digio/digio-aml-cft-api/) — DigiShield - Anti-Money-Laundering and Counter-Financing-of-Terrorism screening and ongoing monitoring against sanctions and watchlists.
+- [Digio Documents API](https://apis.io/apis/digio/digio-documents-api/) — DigiDocs - template-based document and agreement creation with eStamp.
+- [Digio eMandate API](https://apis.io/apis/digio/digio-emandate-api/) — DigiCollect - eNACH / NACH electronic mandates for recurring debit.
+- [Digio KYC API](https://apis.io/apis/digio/digio-kyc-api/) — DigiKYC - identity verification via CKYC, KRA, DigiLocker, and offline Aadhaar.
+- [Digio e Sign API](https://apis.io/apis/digio/digio-e-sign-api/) — DigiSign - Aadhaar and OTP based legally-valid electronic signatures.
 
-## APIs
+### Published properties
 
-### Digio eSign API
+Each property below is a page on APIs.io carrying the machine-readable artifact and what it says.
 
-DigiSign - upload a PDF or template and collect legally-valid Aadhaar-based, OTP-based, or DSC electronic signatures, with signer tracking and signed-document download.
+#### AsyncAPI (1)
 
-- **Human URL:** [https://documentation.digio.in/digisign/](https://documentation.digio.in/digisign/)
-- **Base URL:** `https://api.digio.in`
+Event-driven and webhook contracts.
 
-#### Tags
+- [Digio Webhooks](https://apis.io/asyncapis/digio/digio-webhooks/)
 
-- eSign
-- Aadhaar
-- Digital Signature
-- DigiSign
+#### MCP servers (1)
 
-#### Properties
+Model Context Protocol servers that expose the API to agents.
 
-- [Documentation](https://documentation.digio.in/digisign/)
-- [API Reference](https://documentation.digio.in/digisign/api_integration/create_sign_request/)
-- [OpenAPI](openapi/digio-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Postman Collection](collections/digio.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
+- [digio](https://apis.io/servers/digio/digio/)
 
-### Digio eMandate (eNACH) API
+#### Agentic access (1)
 
-DigiCollect - create and manage NPCI eNACH electronic mandates, physical NACH, and UPI Autopay authorizations for recurring debit, returning a UMRN (Unique Mandate Reference Number).
+Which operations an agent can call, which act, and which need a human in the loop.
 
-- **Human URL:** [https://documentation.digio.in/digicollect/nach/nach_registration/](https://documentation.digio.in/digicollect/nach/nach_registration/)
-- **Base URL:** `https://api.digio.in`
+- [Digio Agentic Access](https://apis.io/agentic-access/digio/digio-agentic-access/)
 
-#### Tags
+#### Collections (8)
 
-- eNACH
-- eMandate
-- NACH
-- DigiCollect
-- Recurring Payments
+Postman and Open Collection request collections.
 
-#### Properties
+- [Digio Documents API](https://apis.io/collections/digio/open-digio-documents-api/)
+- [Digio Documents eMandate API](https://apis.io/collections/digio/open-digio-emandate-api/)
+- [Digio Documents eSign API](https://apis.io/collections/digio/open-digio-esign-api/)
+- [Digio Documents KYC API](https://apis.io/collections/digio/open-digio-kyc-api/)
+- [Digio Documents API](https://apis.io/collections/digio/postman-digio-documents-api/)
+- [Digio Documents eMandate API](https://apis.io/collections/digio/postman-digio-emandate-api/)
+- [Digio Documents eSign API](https://apis.io/collections/digio/postman-digio-esign-api/)
+- [Digio Documents KYC API](https://apis.io/collections/digio/postman-digio-kyc-api/)
 
-- [Documentation](https://documentation.digio.in/digicollect/nach/nach_registration/)
-- [API Reference](https://documentation.digio.in/digicollect/nach/nach_registration/get_mandate_details/)
-- [OpenAPI](openapi/digio-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Postman Collection](collections/digio.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
+#### Overlays (1)
 
-### Digio KYC API
+OpenAPI overlays, including conversational phrasing for each operation.
 
-DigiKYC - template-driven identity verification workflows spanning CKYC, KRA, DigiLocker, ID-proof capture, offline Aadhaar, and Video KYC.
+- [Digio Overlay](https://apis.io/overlays/digio/digio-overlay/)
 
-- **Human URL:** [https://documentation.digio.in/digikyc/](https://documentation.digio.in/digikyc/)
-- **Base URL:** `https://api.digio.in`
+#### Security (4)
 
-#### Tags
+Authentication, trust centre, and vulnerability disclosure.
 
-- KYC
-- Identity Verification
-- CKYC
-- KRA
-- Video KYC
-- DigiKYC
+- [Digio Authentication](https://apis.io/security/digio/digio-authentication/)
+- [Digio Domain Security](https://apis.io/security/digio/digio-domain-security/)
+- [Digio Trust Center](https://apis.io/security/digio/digio-trust-center/)
+- [Digio Vulnerability Disclosure](https://apis.io/security/digio/digio-vulnerability-disclosure/)
 
-#### Properties
+#### Plans and pricing (1)
 
-- [Documentation](https://documentation.digio.in/digikyc/)
-- [API Reference](https://documentation.digio.in/digikyc/ckyc/api_integration/)
-- [OpenAPI](openapi/digio-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Postman Collection](collections/digio.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
+Published plans, tiers and prices.
 
-### Digio DigiLocker API
+- [Digio Plans Pricing](https://apis.io/plans/digio/digio-plans-pricing/)
 
-Fetch government-issued documents (Aadhaar, PAN, driving licence and others) directly from India's DigiLocker with citizen consent for KYC.
+#### Rate limits (1)
 
-- **Human URL:** [https://documentation.digio.in/digikyc/digilocker/](https://documentation.digio.in/digikyc/digilocker/)
-- **Base URL:** `https://api.digio.in`
+Published request limits.
 
-#### Tags
+- [Digio Rate Limits](https://apis.io/rate-limits/digio/digio-rate-limits/)
 
-- DigiLocker
-- KYC
-- Document Verification
+#### FinOps (1)
 
-#### Properties
+What the API costs to run, by operation.
 
-- [Documentation](https://documentation.digio.in/digikyc/digilocker/)
+- [Digio Finops](https://apis.io/finops/digio/digio-finops/)
 
-### Digio Documents & eStamp API
+## Where to find this API
 
-DigiDocs - generate agreements and documents from templates with state-specific eStamp duty collection, then route them into an eSign request.
+Links to the company's own pages. This repository publishes no copy of their specifications — the canonical document is theirs and lives at the URLs below.
 
-- **Human URL:** [https://documentation.digio.in/digidocs/](https://documentation.digio.in/digidocs/)
-- **Base URL:** `https://api.digio.in`
-
-#### Tags
-
-- Documents
-- eStamp
-- Agreements
-- DigiDocs
-
-#### Properties
-
-- [Documentation](https://documentation.digio.in/digidocs/)
-- [API Reference](https://documentation.digio.in/digidocs/api_integration/create_document_from_template_api/)
-- [OpenAPI](openapi/digio-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Postman Collection](collections/digio.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-
-### Digio AML/CFT API
-
-DigiShield - Anti-Money-Laundering and Counter-Financing-of-Terrorism screening and ongoing monitoring against sanctions and watchlists.
-
-- **Human URL:** [https://www.digio.in/](https://www.digio.in/)
-- **Base URL:** `https://api.digio.in`
-
-#### Tags
-
-- AML
-- CFT
-- Screening
-- DigiShield
-
-#### Properties
-
-- [Documentation](https://www.digio.in/)
-
-## Common Properties
-
-- [GitHub Organization](https://github.com/digio-tech)
-- [LinkedIn](https://in.linkedin.com/company/digio.in)
 - [Website](https://www.digio.in/)
 - [Documentation](https://documentation.digio.in/)
-- [Plans](plans/digio-plans-pricing.yml)
-- [Rate Limits](rate-limits/digio-rate-limits.yml)
-- [Fin Ops](finops/digio-finops.yml)
+- [Pricing](https://www.digio.in/pricing/)
+- [Sign up](https://www.digio.in/get-started/)
+- [Support](https://www.digio.in/contact-us/)
 - [Blog](https://www.digio.in/blog/)
+- [Terms of service](https://www.digio.in/terms-and-conditions/)
+- [Privacy policy](https://www.digio.in/privacy-policy/)
+- [GitHub](https://github.com/digio-tech)
 
-## Maintainers
+## API Evangelist rating
 
-**FN:** Kin Lane
-**Email:** kin@apievangelist.com
+**Kin Score 46.4** — developing · rubric 0.25.0 · scored 2026-10-23
+
+| Facet | Score |
+|---|---|
+| Discoverability | 73.2 |
+| Contract quality | 57.6 |
+| Contract governance | 4.5 |
+| Operational transparency | 28.9 |
+| Developer ergonomics | 48.2 |
+| Access clarity | 42.1 |
+
+**Agent readiness 27.1** — agent-aware
+
+| Agent-readiness dimension | Result |
+|---|---|
+| Spec Presence | yes |
+| Agentic Access | derived (partial credit) |
+| Reversibility Documented | documented (partial credit) |
+| MCP Server | — |
+| Auth Clarity | bearer (partial credit) |
+| Idempotency | — |
+| Error Semantics | derived (partial credit) |
+| OpenAPI Examples | — |
+| Rate Limit Signal | derived (partial credit) |
+| Event Surface Described | yes |
+| Agent Skills | derived (partial credit) |
+| Well Known Catalog | — |
+| Consent Identity | — |
+| Agent Card | — |
+| Dry Run Mode | — |
+| Delegated Identity | — |
+| Protected Resource Metadata | — |
+| Dynamic Client Registration | — |
+| Agentic Commerce | — |
+| Pagination Ratio | na |
+| Operation Distinctiveness | distinct |
+
+**Regulatory alignment 35.3** — Horizontal (data, software, accessibility, platform)
+
+The rubric is published at [github.com/api-evangelist/kin-score](https://github.com/api-evangelist/kin-score). The per-check breakdown behind these numbers — which checks were earned, partial or missed — along with score history and how this provider compares to its peers, is available at [apis.io/providers/digio/](https://apis.io/providers/digio/).
+
+## How this profile is made
+
+API Evangelist profiles a company's public API surface the way a developer would find it: the website, developer portal and documentation, the specifications it publishes, its public repositories, and its pricing, status and changelog pages. From that it derives the properties above — contracts split per API, workflows, schemas, collections, governance rules, plans and rate limits — and scores them against the published [Kin Score rubric](https://github.com/api-evangelist/kin-score).
+
+The artifacts are published on [APIs.io](https://apis.io), not in this repository. This repository is the public record for Digio: the place to say something is wrong, missing or out of date, and to ask for a re-score or a removal.
+
+## Open an issue
+
+- **Something about this listing** — a wrong description, a missing API, a stale artifact or a question about the rating: [open an issue on this repository](https://github.com/api-evangelist/digio/issues/new).
+- **A new API, or one that is not in the catalog yet** — [submit it on APIs.io](https://apis.io/add/).
+- **Anything else** — [the APIs.io inbox](https://github.com/api-search/inbox/issues/new) or [info@apievangelist.com](mailto:info@apievangelist.com).
